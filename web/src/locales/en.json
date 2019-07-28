@@ -1,0 +1,19 @@
+{
+  "message": "hello i18n !!",
+  "user": "user",
+  "password": "password",
+  "name":"name",
+  "description":"description",
+  "error_exception": "Error data",
+  "error_email_password_mismatch": "error email/password mismatch",
+  "messages": {
+    "validations.messages.email":"e-mail invalid",
+    "validations.messages.alpha": "alphanumeric",
+    "validations.messages.required": "required",
+    "validations.attributes.email":"e-mail",
+    "messages.email":"e-mail invalid",
+    "messages.alpha": "alphanumeric",
+    "messages.required": "required",
+    "attributes.email":"e-mail"
+  }
+}

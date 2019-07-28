@@ -1,0 +1,19 @@
+{
+  "message": "hello i18n !!",
+  "user": "usuario",
+  "password": "contraseña",
+  "name":"nombre",
+  "description":"descripción",
+  "error_exception": "Error al procesar la información",
+  "error_email_password_mismatch": "Usuario y clave erronea",
+  "messages": {
+    "validations.messages.email":"Debe ser email",
+    "validations.messages.alpha": "Debe ser alfanúmerico",
+    "validations.messages.required": "requerido",
+    "validations.attributes.email":"email",
+    "messages.email":"Debe ser email",
+    "messages.alpha": "Debe ser alfanúmerico",
+    "messages.required": "requerido",
+    "attributes.email":"email"
+  }
+}

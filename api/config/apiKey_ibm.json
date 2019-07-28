@@ -1,0 +1,10 @@
+{
+  "apikey": "eAnF2w6u3c678MmsF54EBLkPsEJNnIH4_2g-r1G9G6Ha",
+  "host": "a73cb18f-a6fb-4e7a-a11d-7b86737ee0ce-bluemix.cloudantnosqldb.appdomain.cloud",
+  "iam_apikey_description": "Auto-generated for key 6376ff85-9be8-404a-be83-2ad547287b7e",
+  "iam_apikey_name": "cloudant-equity-sos",
+  "iam_role_crn": "crn:v1:bluemix:public:iam::::serviceRole:Manager",
+  "iam_serviceid_crn": "crn:v1:bluemix:public:iam-identity::a/18864886278046758b176dd36997c99b::serviceid:ServiceId-281ce842-1318-436a-be23-47848b001e0d",
+  "url": "https://a73cb18f-a6fb-4e7a-a11d-7b86737ee0ce-bluemix.cloudantnosqldb.appdomain.cloud",
+  "username": "a73cb18f-a6fb-4e7a-a11d-7b86737ee0ce-bluemix"
+}

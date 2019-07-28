@@ -1,0 +1,16 @@
+{
+  "appId": "com.app.equitySos",
+  "appName": "equity sos",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "dist",
+  "android": {
+    "allowMixedContent": true,
+    "captureInput": true,
+    "webContentsDebuggingEnabled": true
+  },
+  "ios": {
+    "cordovaSwiftVersion": "3.2",
+    "minVersion": "10.3"
+  }
+}
