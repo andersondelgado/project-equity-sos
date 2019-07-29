@@ -84,7 +84,7 @@
                               </div>
                             </div>
                           </div>
-                          <div v-if="fi.type=='video'" class="row">
+                          <!-- <div v-if="fi.type=='video'" class="row">
                             <div
                               class="col"
                               v-for="(fi1,index1) in fi.name"
@@ -101,7 +101,7 @@
                                 />
                               </div>
                             </div>
-                          </div>
+                          </div> -->
                         </div>
                         <div v-if="i.id==3">
                           <fieldset>

@@ -157,6 +157,7 @@
               </div>
               <div class="form-group">
                 <select name="rol" v-model="form.rol" class="form-control">
+                  <option>Select rol</option>
                   <option v-for="i in data_select" :key="i._id" v-bind:value="i.rol">{{i.rol}}</option>
                 </select>
               </div>
@@ -267,6 +268,7 @@
               </div>
               <div class="form-group">
                 <select name="rol" v-model="formEdit.rol" class="form-control">
+                  <option>Select rol</option>
                   <option v-for="i in data_select" :key="i._id" v-bind:value="i.rol">{{i.rol}}</option>
                 </select>
               </div>
