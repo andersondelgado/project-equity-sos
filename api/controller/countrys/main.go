@@ -7,9 +7,9 @@ import (
 	"log"
 	"strconv"
 
-	"../../config"
-	"../../model"
-	"../../util"
+	"github.com/andersondelgado/equity-sos-go-dev/config"
+	"github.com/andersondelgado/equity-sos-go-dev/model"
+	"github.com/andersondelgado/equity-sos-go-dev/util"
 	"github.com/gin-gonic/gin"
 )
 
@@ -238,11 +238,11 @@ func DeleteCountrys(c *gin.Context) {
 	if util.IsDelete(c, rol).Success == true {
 
 		cloudantUrl := config.StrNoSQLDrive()
-		cloudant := util.CloudantDefault()
-
-		//ensure db exists
-		//if the db exists the db will be returned anyway
-		dbName := config.StrNoSQLDBname()
+		//cloudant := util.CloudantDefault()
+		//
+		////ensure db exists
+		////if the db exists the db will be returned anyway
+		//dbName := config.StrNoSQLDBname()
 		// cloudant.CreateDB(dbName)
 
 		if cloudantUrl == "" {
@@ -250,7 +250,8 @@ func DeleteCountrys(c *gin.Context) {
 			return
 		}
 
-		cloudant.DB(dbName).Delete(id, rev)
+		//cloudant.DB(dbName).Delete(id, rev)
+		util.DeleteCouchDBByID(id,rev)
 		var datas util.Response
 		datas = util.Response{
 			true,
@@ -273,11 +274,11 @@ func AddCountrys(c *gin.Context) {
 	if util.IsCreate(c, rol).Success == true {
 
 		cloudantUrl := config.StrNoSQLDrive()
-		cloudant := util.CloudantDefault()
-
-		//ensure db exists
-		//if the db exists the db will be returned anyway
-		dbName := config.StrNoSQLDBname()
+		//cloudant := util.CloudantDefault()
+		//
+		////ensure db exists
+		////if the db exists the db will be returned anyway
+		//dbName := config.StrNoSQLDBname()
 		// cloudant.CreateDB(dbName)
 
 		if cloudantUrl == "" {
@@ -301,8 +302,8 @@ func AddCountrys(c *gin.Context) {
 				c.JSON(200, datas)
 			} else {
 				var arrKey = []string{"countrys"}
-				cloudant.DB(dbName).Post(map[string]interface{}{"meta": arrKey[0], "tag": arrKey, "countrys": t})
-
+				//cloudant.DB(dbName).Post(map[string]interface{}{"meta": arrKey[0], "tag": arrKey, "countrys": t})
+				util.PostCouchDB(map[string]interface{}{"meta": arrKey[0], "tag": arrKey, "countrys": t})
 				datas = util.Response{
 					true,
 					"ok",
@@ -334,11 +335,11 @@ func BulkCountrys(c *gin.Context) {
 	// if util.IsCreate(c, rol).Success == true {
 
 	cloudantUrl := config.StrNoSQLDrive()
-	cloudant := util.CloudantDefault()
-
-	//ensure db exists
-	//if the db exists the db will be returned anyway
-	dbName := config.StrNoSQLDBname()
+	//cloudant := util.CloudantDefault()
+	//
+	////ensure db exists
+	////if the db exists the db will be returned anyway
+	//dbName := config.StrNoSQLDBname()
 	// cloudant.CreateDB(dbName)
 
 	if cloudantUrl == "" {
@@ -362,8 +363,8 @@ func BulkCountrys(c *gin.Context) {
 			c.JSON(200, datas)
 		} else {
 			var arrKey = []string{"countrys"}
-			cloudant.DB(dbName).Post(map[string]interface{}{"meta": arrKey[0], "tag": arrKey, "countrys": t})
-
+			//cloudant.DB(dbName).Post(map[string]interface{}{"meta": arrKey[0], "tag": arrKey, "countrys": t})
+			util.PostCouchDB(map[string]interface{}{"meta": arrKey[0], "tag": arrKey, "countrys": t})
 			datas = util.Response{
 				true,
 				"ok",
@@ -397,11 +398,11 @@ func PutCountrys(c *gin.Context) {
 	if util.IsUpdate(c, rol).Success == true {
 
 		cloudantUrl := config.StrNoSQLDrive()
-		cloudant := util.CloudantDefault()
+		//cloudant := util.CloudantDefault()
 
 		//ensure db exists
 		//if the db exists the db will be returned anyway
-		dbName := config.StrNoSQLDBname()
+		//dbName := config.StrNoSQLDBname()
 		// cloudant.CreateDB(dbName)
 
 		if cloudantUrl == "" {
@@ -425,7 +426,8 @@ func PutCountrys(c *gin.Context) {
 				c.JSON(200, datas)
 			} else {
 				var arrKey = []string{"countrys"}
-				cloudant.DB(dbName).Put(id, map[string]interface{}{"meta": arrKey[0], "tag": arrKey, "countrys": t}, rev)
+				//cloudant.DB(dbName).Put(id, map[string]interface{}{"meta": arrKey[0], "tag": arrKey, "countrys": t}, rev)
+				util.PutCouchDBByID(id, map[string]interface{}{"meta": arrKey[0], "tag": arrKey, "countrys": t, "_id": id, "_rev": rev})
 				datas = util.Response{
 					true,
 					"ok",

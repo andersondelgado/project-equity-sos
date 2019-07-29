@@ -7,9 +7,9 @@ import (
 	"net/http"
 	"strconv"
 
-	"../../config"
-	"../../model"
-	"../../util"
+	"github.com/andersondelgado/equity-sos-go-dev/config"
+	"github.com/andersondelgado/equity-sos-go-dev/model"
+	"github.com/andersondelgado/equity-sos-go-dev/util"
 	"github.com/gin-gonic/gin"
 )
 
@@ -27,7 +27,7 @@ func SelectDBTest(c *gin.Context) {
 	//dbName := config.StrNoSQLDBname()
 	//cloudant.CreateDB(dbName)
 
-	var result model.AlldocsResult
+	//var result model.AlldocsResult
 	// var result model.Test
 	if cloudantUrl == "" {
 		c.JSON(200, gin.H{})
@@ -39,7 +39,11 @@ func SelectDBTest(c *gin.Context) {
 	util.CreateCouchDB()
 	// errs := cloudant.DB(dbName).AllDocs(&result, couchdb.Options{"include_docs": false})
 
-	c.JSON(200, result.Rows)
+	//c.JSON(200, result.Rows)
+	c.Header("Content-Type", "application/json")
+	c.JSON(http.StatusOK, gin.H{
+		"message": "Jokes handler not implemented yet",
+	})
 
 }
 

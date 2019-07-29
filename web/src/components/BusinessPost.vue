@@ -213,7 +213,9 @@
                       type="number"
                       class="form-control"
                       v-model="i.quantity_delivery"
-                      placeholder="quantity"
+                      placeholder="quantity send"
+                      @keyup="validateFieldQuantity(i,$event)"
+                      @change="validateFieldQuantity(i,$event)"
                     />
                   </div>
                 </div>
@@ -242,6 +244,7 @@
                 </span>
               </div>
             </div>
+
           </div>
           <div class="modal-footer">
             <button
@@ -496,6 +499,13 @@ export default class BusinessPost extends Vue {
       });
   }
 
+  validateFieldQuantity(payload: any, event:any) {
+    let val = event.target.value
+    if ( payload.quantity_delivery < 1 || payload.quantity_left < payload.quantity_delivery) { 
+      	event.target.value = val.substring(0,val.length -1)
+    }
+  }
+
   addArticleByActor(payload: any) {
     let g = new Global();
     try {
@@ -553,6 +563,7 @@ export default class BusinessPost extends Vue {
   subsQuantityAsk(i: any) {
     // let qask = parseInt(i.quantity_ask) - parseInt(i.quantity_left);
     // i.quantity_ask = qask;
+    console.log(i)
     return i;
   }
 
@@ -580,8 +591,8 @@ export default class BusinessPost extends Vue {
   }
 
   public edit(id: any, _rev: any) {
+    this.dataEdit = [];
     const endpoint: any = Global.const.POST_BUSINESS_EDIT + id;
-    this.dataEdit = undefined;
     axios
       .get(endpoint, {
         headers: this.headers

@@ -293,6 +293,7 @@ export default class Category extends Vue {
           }
         } else {
           // this.errors.push(response.data.message);
+          this.data = [];
         }
       });
   }
@@ -333,6 +334,7 @@ export default class Category extends Vue {
           }
         } else {
           // this.errors.push(response.data.message);
+          this.data = [];
         }
       });
   }
@@ -367,7 +369,7 @@ export default class Category extends Vue {
         headers: this.headers
       })
       .then((response: any) => {
-        if (response.data.success === true) {
+        if (response.data.success) {
           this.dataEdit = [];
           $("#createModal").modal("hide");
           this.initComponent();

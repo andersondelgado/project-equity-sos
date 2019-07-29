@@ -9,9 +9,9 @@ import (
 	"strconv"
 	"time"
 
-	"../../config"
-	"../../model"
-	"../../util"
+	"github.com/andersondelgado/equity-sos-go-dev/config"
+	"github.com/andersondelgado/equity-sos-go-dev/model"
+	"github.com/andersondelgado/equity-sos-go-dev/util"
 	"github.com/dgrijalva/jwt-go"
 	"github.com/gin-gonic/gin"
 	"github.com/timjacobi/go-couchdb"

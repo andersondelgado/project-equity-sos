@@ -370,7 +370,7 @@ export default class Article extends Vue {
         headers: this.headers
       })
       .then((response: any) => {
-        if (response.data.success === true) {
+        if (response.data.success) {
           // console.log(response.data.data);
           this.data = response.data.data;
           const keys: any = [];
@@ -396,6 +396,7 @@ export default class Article extends Vue {
           this.columns = keys;
         } else {
           // this.errors.push(response.data.message);
+          this.data = [];
         }
       });
   }
@@ -410,7 +411,7 @@ export default class Article extends Vue {
         headers: this.headers
       })
       .then((response: any) => {
-        if (response.data.success === true) {
+        if (response.data.success) {
           // console.log(response.data.data);
           this.data =
             response.data.data !== undefined ? response.data.data : [];
@@ -438,6 +439,7 @@ export default class Article extends Vue {
           }
         } else {
           // this.errors.push(response.data.message);
+          this.data = [];
         }
       });
   }

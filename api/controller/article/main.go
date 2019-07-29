@@ -7,9 +7,9 @@ import (
 	"log"
 	"strconv"
 
-	"../../config"
-	"../../model"
-	"../../util"
+	"github.com/andersondelgado/equity-sos-go-dev/config"
+	"github.com/andersondelgado/equity-sos-go-dev/model"
+	"github.com/andersondelgado/equity-sos-go-dev/util"
 	"github.com/gin-gonic/gin"
 )
 
@@ -135,6 +135,8 @@ func PaginateArticle(c *gin.Context) {
 
 		respText := util.FindDataInterface(resultsx)
 
+		fmt.Println("##str:**************************************** ", respText)
+
 		jsonToString := (respText)
 		decode := []byte(jsonToString)
 		var results model.ArticleDocumentsArray
@@ -230,7 +232,7 @@ func SearchPaginateArticle(c *gin.Context) {
 				"selector": map[string]interface{}{
 					"meta": arrKey[0],
 					"articles.name": map[string]interface{}{
-						"$gt": t.Name,
+						"$regex": t.Name,
 					},
 					"tag": arrTag,
 				},
@@ -380,11 +382,11 @@ func DeleteArticle(c *gin.Context) {
 	if util.IsDelete(c, rol).Success == true {
 
 		cloudantUrl := config.StrNoSQLDrive()
-		cloudant := util.CloudantDefault()
-
-		//ensure db exists
-		//if the db exists the db will be returned anyway
-		dbName := config.StrNoSQLDBname()
+		//cloudant := util.CloudantDefault()
+		//
+		////ensure db exists
+		////if the db exists the db will be returned anyway
+		//dbName := config.StrNoSQLDBname()
 		// cloudant.CreateDB(dbName)
 
 		if cloudantUrl == "" {
@@ -392,7 +394,8 @@ func DeleteArticle(c *gin.Context) {
 			return
 		}
 
-		cloudant.DB(dbName).Delete(id, rev)
+		//cloudant.DB(dbName).Delete(id, rev)
+		util.DeleteCouchDBByID(id, rev)
 		var datas util.Response
 		datas = util.Response{
 			true,
@@ -478,11 +481,11 @@ func PutArticle(c *gin.Context) {
 	if util.IsUpdate(c, rol).Success == true {
 
 		cloudantUrl := config.StrNoSQLDrive()
-		cloudant := util.CloudantDefault()
-
-		//ensure db exists
-		//if the db exists the db will be returned anyway
-		dbName := config.StrNoSQLDBname()
+		//cloudant := util.CloudantDefault()
+		//
+		////ensure db exists
+		////if the db exists the db will be returned anyway
+		//dbName := config.StrNoSQLDBname()
 		// cloudant.CreateDB(dbName)
 
 		if cloudantUrl == "" {
@@ -506,7 +509,8 @@ func PutArticle(c *gin.Context) {
 				c.JSON(200, datas)
 			} else {
 				var arrKey = []string{"articles"}
-				cloudant.DB(dbName).Put(id, map[string]interface{}{"meta": arrKey[0], "tag": arrKey, "articles": t}, rev)
+				//cloudant.DB(dbName).Put(id, map[string]interface{}{"meta": arrKey[0], "tag": arrKey, "articles": t}, rev)
+				util.PutCouchDBByID(id, map[string]interface{}{"meta": arrKey[0], "tag": arrKey, "articles": t, "_id": id, "_rev": rev})
 				datas = util.Response{
 					true,
 					"ok",

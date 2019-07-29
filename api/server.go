@@ -1,19 +1,23 @@
 package main
 
 import (
+	"github.com/andersondelgado/equity-sos-go-dev/controller/article"
+	"github.com/andersondelgado/equity-sos-go-dev/controller/category"
+	"github.com/andersondelgado/equity-sos-go-dev/controller/countrys"
+	"github.com/andersondelgado/equity-sos-go-dev/controller/post"
+	"github.com/andersondelgado/equity-sos-go-dev/controller/security"
+	"github.com/andersondelgado/equity-sos-go-dev/controller/test"
+	"github.com/andersondelgado/equity-sos-go-dev/controller/userKyc"
+	"github.com/andersondelgado/equity-sos-go-dev/middlewares"
 	"fmt"
 	"net/http"
 	"os"
-	"./controller/article"
-	"./controller/category"
-	"./controller/countrys"
-	"./controller/post"
-	"./controller/security"
-	"./controller/test"
-	"./middlewares"
-	"github.com/gin-gonic/contrib/static"
+
+	//"github.com/andersondelgado/equity-sos/config"
+	//"github.com/andersondelgado/equity-sos/model"
+	//"github.com/andersondelgado/equity-sos/util"
+
 	"github.com/gin-gonic/gin"
-	"github.com/gin-contrib/size"
 )
 
 func CORSMiddleware() gin.HandlerFunc {
@@ -44,9 +48,12 @@ func main() {
 
 	// Serve frontend static files
 	var size int64
-	size=(200 * 1024 * 1024)
-	router.Use(limits.RequestSizeLimiter(size))
-	router.Use(static.Serve("/", static.LocalFile("./views", true)))
+	size = (200 * 1024 * 1024)
+	//router.Use(limits.RequestSizeLimiter(size))
+	//router.Use(limits.RequestSizeLimiter(size))
+	fmt.Println(size)
+	// router.
+	// router.Use(static.Serve("/", static.LocalFile("./views", true)))
 
 	// router.Use(cors.New(cors.Config{
 	// 	AllowOrigins: []string{"*"},
@@ -159,10 +166,19 @@ func main() {
 	r.GET("/users/delete/:id/:rev", security.DeleteUsers)
 	// list roles
 	api.GET("/permission/list", security.ListPermissions)
+	// kyc user
+ 	api.GET("/kyc/faker", userKyc.KycFaker)
+	api.POST("/kyc/bulk", userKyc.BulkKyc)
+	r.GET("/kyc/all", userKyc.SelectKyc)
+	r.GET("/kyc/userKyc", userKyc.SelectKycUser)
+	r.GET("/kyc/userKyc/:id", userKyc.SelectKycUser)
+
+	r.POST("/kyc-user/add", userKyc.AddKycUser)
+	r.PUT("/kyc-user/edit", userKyc.EditKycUser)
 	// Start and run the server
 	var port string
 	if port = os.Getenv("PORT"); len(port) == 0 {
 		port = DEFAULT_PORT
 	}
-	router.Run(":"+port)
+	router.Run(":" + port)
 }

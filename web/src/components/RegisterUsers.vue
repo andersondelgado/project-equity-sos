@@ -136,7 +136,7 @@
               </div>
               <div class="form-group">
                 <input
-                  type="text"
+                  type="password"
                   v-model="form.password"
                   name="password"
                   v-validate="'required'"

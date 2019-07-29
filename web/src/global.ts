@@ -8,10 +8,17 @@ export const messageService = {
     getSearchs: () => subject.asObservable()
 };
 
+export const TableService = {
+  setTable: (tableData:any)=> subject.next({ array: tableData }),
+  clearTable: () => subject.next(),
+  getTable: () => subject.asObservable()
+};
+
+
 export default class Global {
 
   public static DOMAIN = 'http://localhost:8000/api/';
-  // public static DOMAIN = 'http://192.168.88.170:8000/api/';
+  // public static DOMAIN = 'https://equity-sos-go-dev-grouchy-swan.mybluemix.net/api/';
 
   public static const = {
     LOGIN: Global.DOMAIN + 'login',
@@ -59,9 +66,24 @@ export default class Global {
     POST_UPDATE: Global.DOMAIN + 'post/update/',
     POST_BUSINESS_EDIT: Global.DOMAIN + 'post/business/edit/',
     POST_BUSINESS_UPDATE: Global.DOMAIN + 'post/business/update/',
+    GET_COUNTRY_LIST: Global.DOMAIN + 'country/all',
+    // Kyc
+    GET_KYC_LIST: Global.DOMAIN + 'kyc/all',
+    GET_KYC_USER: Global.DOMAIN + 'kyc/userKyc',
+    GET_KYC_USER_LIST: Global.DOMAIN + 'kyc-user/{userId}',
+    POST_KYC_USER_DOCUMENTS: Global.DOMAIN + 'kyc-user/add',
+    PUT_KYC_USER_DOCUMENTS: Global.DOMAIN + 'kyc-user/edit',
+    PUT_KYC_USER_DOCUMENTS_VALIDATE: Global.DOMAIN + 'kyc/adminValidate'
   };
 
+  public static headers: any = {
+    "Content-Type": "application/json"
+  };
   
+  public static cors: any = {
+    headers: Global.headers
+  }
+
   public getBase64ImageEncode(img: any): any {
     const promise: any = new Promise((resolve, reject) => {
       let baseString: any;

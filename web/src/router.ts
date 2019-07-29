@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Router from 'vue-router';
 // import Home from './views/Home.vue';
 import About from './views/About.vue';
+import Dashboard from './components/Dashboard.vue';
 import Login from './components/Login.vue';
 import Register from './components/Register.vue';
 import Index from './components/Index.vue';
@@ -13,6 +14,7 @@ import UserPost from './components/UserPost.vue';
 import Article from './components/Article.vue';
 import Category from './components/Category.vue';
 import RegisterUsers from './components/RegisterUsers.vue';
+import KycUser from './components/KycUser.vue';
 
 import store from './store';
 Vue.use(Router);
@@ -41,7 +43,7 @@ const routes = [
     children: [
       {
         path: '',
-        component: About
+        component: Dashboard
       },
       {
         path: 'test',
@@ -89,6 +91,18 @@ const routes = [
         path: 'register-users',
         name: 'register-users',
         component: RegisterUsers,
+        meta: { requiresPer: true }
+      },
+      {
+        path: 'kyc-user',
+        name: 'kyc-user',
+        component: KycUser,
+        meta: { requiresPer: true }
+      },
+      {
+        path: 'kyc-admin',
+        name: 'kyc-admin',
+        component: KycUser,
         meta: { requiresPer: true }
       }
     ],

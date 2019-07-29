@@ -12,7 +12,7 @@
         "name": "test",
         "lang_property": "test",
         "acl": "test",
-        "visible": true,
+        "visible": false,
         "value": [
           "read",
           "create",
@@ -55,7 +55,7 @@
           "read",
           "edit"
         ]
-      },      
+      },
       {
         "url": "/main/user-post",
         "iconWeb": "",
@@ -73,7 +73,24 @@
           "edit",
           "update"
         ]
-      }      
+      },
+      {
+        "url": "/main/kyc-user",
+        "iconWeb": "",
+        "mobile": "",
+        "android": "",
+        "ios": "",
+        "ionic": "",
+        "name": "kyc user",
+        "lang_property": "kyc_user",
+        "acl": "kyc_user",
+        "visible": true,
+        "value": [
+          "read",
+          "create",
+          "edit"
+        ]
+      }
     ]
   },
   {
@@ -167,6 +184,23 @@
           "update",
           "delete"
         ]
+      },
+      {
+        "url": "/main/kyc-user",
+        "iconWeb": "",
+        "mobile": "",
+        "android": "",
+        "ios": "",
+        "ionic": "",
+        "name": "kyc user",
+        "lang_property": "kyc_user",
+        "acl": "kyc_user",
+        "visible": true,
+        "value": [
+          "read",
+          "create",
+          "edit"
+        ]
       }
     ]
   },
@@ -183,7 +217,7 @@
         "name": "test",
         "lang_property": "test",
         "acl": "test",
-        "visible": true,
+        "visible": false,
         "value": [
           "read",
           "create",
@@ -296,7 +330,7 @@
         "name": "post",
         "lang_property": "post",
         "acl": "post",
-        "visible": true,
+        "visible": false,
         "value": [
           "read",
           "create",
@@ -304,7 +338,24 @@
           "update",
           "delete"
         ]
-      }      
+      },
+      {
+        "url": "/main/kyc-admin",
+        "iconWeb": "",
+        "mobile": "",
+        "android": "",
+        "ios": "",
+        "ionic": "",
+        "name": "kyc admin",
+        "lang_property": "kyc_admin",
+        "acl": "kyc_user",
+        "visible": true,
+        "value": [
+          "read",
+          "create",
+          "edit"
+        ]
+      }
     ]
   }
 ]

@@ -4,7 +4,7 @@
     <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top text-white">
       <div class="container">
         <div class="navbar-wrapper">
-          <a class="navbar-brand" href="#pablo">Login</a>
+          <a class="navbar-brand" href="#">login</a>
         </div>
         <button
           class="navbar-toggler"
@@ -22,8 +22,8 @@
         <div class="collapse navbar-collapse justify-content-end">
           <ul class="navbar-nav">
             <li class="nav-item">
-              <a href="register.html" class="nav-link">
-                <i class="material-icons">person_add</i> Register
+              <a href="/register" class="nav-link">
+                <i class="material-icons">person_add</i>
               </a>
             </li>
           </ul>
@@ -45,17 +45,7 @@
                 <div class="card card-login">
                   <div class="card-header card-header-rose text-center">
                     <h4 class="card-title">Login</h4>
-                    <div class="social-line">
-                      <a href="#pablo" class="btn btn-just-icon btn-link btn-white">
-                        <i class="fa fa-facebook-square"></i>
-                      </a>
-                      <a href="#pablo" class="btn btn-just-icon btn-link btn-white">
-                        <i class="fa fa-twitter"></i>
-                      </a>
-                      <a href="#pablo" class="btn btn-just-icon btn-link btn-white">
-                        <i class="fa fa-google-plus"></i>
-                      </a>
-                    </div>
+                    <img src="../assets/logo.png" alt="materialize logo" />
                   </div>
                   <div class="card-body">
                     <span class="bmd-form-group">
@@ -111,7 +101,7 @@
                       class="btn btn-rose btn-link btn-lg"
                       v-on:click="enviar()"
                     >Login</button>
-                    <br>
+                    <br />
                     <img
                       v-if="data===undefined"
                       src="../assets/loading2.gif"
@@ -120,6 +110,7 @@
                       height="30"
                       alt
                     />
+                    <p v-if="isError">{{$t(messages)}}</p>
                   </div>
                 </div>
               </form>
@@ -180,7 +171,6 @@ export default class Login extends Vue {
     this.messages = "";
     // console.log("##hola.....");
     const endpoint: any = Global.const.LOGIN;
-    // const endpoint:any = "https://disobey-api.herokuapp.com/api/v1/login"
     axios
       .post(endpoint, this.form, {
         headers: this.headers
@@ -192,6 +182,7 @@ export default class Login extends Vue {
           localStorage.setItem("token", response.data.data.token);
           // console.log("hola....." + response.data.data.token);
           // location.replace("/login");
+          // location.reload();
           location.reload();
         } else {
           // this.errors.push(response.data.message);

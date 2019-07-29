@@ -93,7 +93,17 @@ export default {
       "/assets/js/plugins/perfect-scrollbar.jquery.min.js",
       "/assets/js/plugins/moment.min.js",
       "/assets/demo/demo.js",
-      "/assets/js/material-dashboard.min.js?v=2.1.0"
+      "/assets/js/material-dashboard.min.js?v=2.1.0",
+      // Plugins
+      "/assets/js/plugins/jquery.dataTables.min.js",
+      "/assets/js/plugins/jquery.validate.min.js",
+      "/assets/js/plugins/bootstrap-datetimepicker.min.js",
+      "/assets/js/plugins/bootstrap-selectpicker.js",
+      "/assets/js/plugins/fullcalendar.min.js",
+      "/assets/js/plugins/chartist.min.js",
+      "/assets/js/plugins/jasny-bootstrap.min.js",
+      //Custom Exports
+      "/assets/js/custom.js"
     ];
 
     var leaflet_lib = [

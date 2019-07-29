@@ -9,12 +9,12 @@
       <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top">
         <div class="container-fluid">
           <div class="navbar-wrapper">
-            <div class="navbar-minimize">
+            <!-- <div class="navbar-minimize">
               <button id="minimizeSidebar" class="btn btn-just-icon btn-white btn-fab btn-round">
                 <i class="material-icons text_align-center visible-on-sidebar-regular">more_vert</i>
                 <i class="material-icons design_bullet-list-67 visible-on-sidebar-mini">view_list</i>
               </button>
-            </div>
+            </div>-->
             <!-- <a class="navbar-brand" href="#"></a> -->
           </div>
           <button
@@ -50,13 +50,13 @@
             </div>
 
             <ul class="navbar-nav">
-              <li class="nav-item">
+              <!-- <li class="nav-item">
                 <a class="nav-link" href="#pablo">
                   <i class="material-icons">dashboard</i>
                   <p class="d-lg-none d-md-block">Stats</p>
                 </a>
-              </li>
-              <li class="nav-item dropdown show">
+              </li>-->
+              <!-- <li class="nav-item dropdown">
                 <a
                   class="nav-link"
                   href="http://example.com/"
@@ -71,7 +71,7 @@
                   <div class="ripple-container"></div>
                 </a>
                 <div
-                  class="dropdown-menu dropdown-menu-right show"
+                  class="dropdown-menu dropdown-menu-right hide"
                   aria-labelledby="navbarDropdownMenuLink"
                 >
                   <a class="dropdown-item" href="#">Mike John responded to your email</a>
@@ -80,7 +80,7 @@
                   <a class="dropdown-item" href="#">Another Notification</a>
                   <a class="dropdown-item" href="#">Another One</a>
                 </div>
-              </li>
+              </li>-->
               <li class="nav-item dropdown">
                 <a
                   class="nav-link"
@@ -98,10 +98,14 @@
                   class="dropdown-menu dropdown-menu-right"
                   aria-labelledby="navbarDropdownProfile"
                 >
-                  <a class="dropdown-item" href="#">Profile</a>
-                  <a class="dropdown-item" href="#">Settings</a>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="javascript:void(0)" @click="logout()">Log out</a>
+                  <!-- <a class="dropdown-item" href="#">Profile</a> -->
+                  <!-- <a class="dropdown-item" href="#">Settings</a>  -->
+                  <!-- <div class="dropdown-divider"></div> -->
+                  <a
+                    class="dropdown-item"
+                    href="javascript:void(0)"
+                    @click="logout()"
+                  >{{$t('logout')}}</a>
                 </div>
               </li>
             </ul>
@@ -141,12 +145,14 @@ export default class Index extends Vue {
     "Content-Type": "application/json"
   };
 
-  /*dataUser: any = {
-    username:"",
-    avatar:""
-  }; */
+  dataUser: any = {
+    username: "",
+    avatar: ""
+  };
 
+  /**/
   public menu() {
+    console.log("Menu de Componente Index");
     // console.log('form: ');
     // console.log(this.form);
     const endpoint: any = Global.const.MENU;
@@ -163,8 +169,8 @@ export default class Index extends Vue {
         }
       });
   }
-
-  /* public userInfo() {
+  /**/
+  public userInfo() {
     // console.log('form: ');
     // console.log(this.form);
     const endpoint: any = Global.const.USER_INFO;
@@ -180,7 +186,7 @@ export default class Index extends Vue {
           // this.errors.push(response.data.message);
         }
       });
-  } */ 
+  } /**/
 
   public search(evt: any) {
     console.log("#search patern: " + evt);
@@ -196,12 +202,14 @@ export default class Index extends Vue {
     localStorage.removeItem("permission");
     store.commit("logoutUser");
     // location.replace("/login");
-    location.reload();
+    this.$router.replace({ path: "/login" });
+    // location.reload();
   }
 
   public mounted() {
     this.menu();
-    // this.userInfo();
+    this.userInfo();
   }
 }
 </script>
+

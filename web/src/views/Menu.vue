@@ -22,12 +22,12 @@
             <a data-toggle="collapse" href="#collapseExample" class="username">
               <span>
                 {{dataUser.username}}
-                <b class="caret"></b>
+                <!-- <b class="caret"></b> -->
               </span>
             </a>
             <div class="collapse" id="collapseExample">
               <ul class="nav">
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                   <a class="nav-link" href="#">
                     <span class="sidebar-mini">MP</span>
                     <span class="sidebar-normal">My Profile</span>
@@ -38,13 +38,13 @@
                     <span class="sidebar-mini">EP</span>
                     <span class="sidebar-normal">Edit Profile</span>
                   </a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">
-                    <span class="sidebar-mini">S</span>
-                    <span class="sidebar-normal">Settings</span>
+                </li>-->
+                <!-- <li class="nav-item">
+                  <a class="nav-link" href="#" @click="logout()">                     
+                    <span class="sidebar-mini">L</span>
+                    <span class="sidebar-normal">Logout</span>
                   </a>
-                </li>
+                </li> -->
               </ul>
             </div>
           </div>
@@ -62,7 +62,8 @@
           <li class="nav-item" v-for="k in data" :key="k.url">
             <router-link :to="{ path: k.url}" class="nav-link">
               <i class="material-icons">dashboard</i>
-              <p data-i18n>{{k.name}}</p>
+              <!-- <p data-i18n>{{k.name}}</p> -->
+              <p>{{$t(k.lang_property)}}</p>
             </router-link>
           </li>
         </ul>
@@ -109,6 +110,7 @@ export default class Menu extends Vue {
       .then(response => {
         if (response.data.success === true) {
           this.data = response.data.data;
+          localStorage.setItem("permission", JSON.stringify(this.data));
         } else {
           // this.errors.push(response.data.message);
         }
@@ -116,8 +118,6 @@ export default class Menu extends Vue {
   }
 
   public userInfo() {
-    // console.log('form: ');
-    // console.log(this.form);
     const endpoint: any = Global.const.USER_INFO;
     axios
       .get(endpoint, {
@@ -129,11 +129,20 @@ export default class Menu extends Vue {
           let data = response.data.data;
           this.dataUser.username = data.username;
           this.dataUser.avatar = data.avatar;
-          // localStorage.setItem("users", JSON.stringify(this.dataUser));
+          localStorage.setItem("users", JSON.stringify(this.dataUser));
         } else {
           // this.errors.push(response.data.message);
         }
       });
+  }
+
+  public logout() {
+    localStorage.removeItem("token");
+    localStorage.removeItem("permission");
+    store.commit("logoutUser");
+    // location.replace("/login");
+    this.$router.replace({ path: "/login" });
+    // location.reload();
   }
 
   public mounted() {

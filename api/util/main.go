@@ -10,8 +10,8 @@ import (
 	"net/http"
 	"strings"
 
-	"../config"
-	"../model"
+	"github.com/andersondelgado/equity-sos-go-dev/config"
+	"github.com/andersondelgado/equity-sos-go-dev/model"
 	"github.com/dgrijalva/jwt-go"
 	"github.com/gin-gonic/gin"
 	"github.com/timjacobi/go-couchdb"
@@ -1243,6 +1243,7 @@ func CreateCouchDB() (bool, error) {
 	resultData := CurlBodyJSONMustHeader("PUT", uri, payload, headers)
 
 	jsonToString := (resultData)
+	fmt.Println("create db: ",jsonToString)
 	decode := []byte(jsonToString)
 	var data struct {
 		OK bool `json:"ok"`

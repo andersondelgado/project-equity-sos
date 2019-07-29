@@ -1,5 +1,0 @@
----
-applications:
-- name: equitysosapp
-  random-route: true
-  memory: 128M

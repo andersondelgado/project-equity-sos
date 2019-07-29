@@ -263,29 +263,52 @@ type KYC struct {
 /////////end:KYC document///////////////////////
 
 /////////begin:user KYC document///////////////////////
-type UserKYCDocument struct {
-	Doc UserKYCDoc `json:"doc"`
+type KYCUserDocument struct {
+	Doc KYCUserDoc `json:"doc"`
 }
-type UserKYCDocumentsArray struct {
-	Doc []UserKYCDoc `json:"docs"`
+type KYCUserDocumentsArray struct {
+	Doc []KYCUserDoc `json:"docs"`
 
 	Bookmark string `json:"bookmark"`
 	Warning  string `json:"warning"`
 }
-type UserKYCDoc struct {
+
+type KYCUserDoc struct {
 	ID      string  `json:"_id"`
 	Rev     string  `json:"_rev"`
-	UserKYC UserKYC `json:"user_kyc"`
+	KycUser KycUser `json:"kyc_user"`
 }
-type UserKYC struct {
+
+type KycUser struct {
 	IDs       string    `json:"_id"`
 	Rev       string    `json:"_rev"`
 	ID        string    `json:"id"`
 	UserID    string    `json:"user_id"`
-	KYCID     string    `json:"kyc_id"`
-	CreatedAt time.Time `json:"created_at"`
-	UpdatedAt time.Time `json:"updated_at"`
+	CompanyName     	string    `json:"company_name"`
+	CompanyCountryID    string    `json:"company_country_id"`
+	CountryID     		string    `json:"country_id"`
+	Name     			string    `json:"name"`
+	LastName     		string    `json:"last_name"`
+	City     			string    `json:"city"`
+	Address     		string    `json:"address"`
+	AboutPerson     	string    `json:"about_person"`
+	PostalCode     		string    `json:"postal_code"`
+	Dob     			string    `json:"dob"`
+	Attachment     		[]KycAttachment    `json:"attachment"`
+	StatusUserInfo    	bool    	`json:"status_user_info"`
+	DisabledUser     	bool    	`json:"disabled_user"`
+	CreatedAt 			time.Time `json:"created_at"`
+	UpdatedAt 			time.Time `json:"updated_at"`
 }
+
+type KycAttachment struct {
+	KycID 			string    `json:"document_id"`
+	AttachmentName 	string    `json:"attachment_name"`
+	Status 			string    `json:"status"`
+	CreatedAt 		time.Time `json:"created_at"`
+	//UpdatedAt 		time.Time `json:"updated_at"`
+}
+
 
 /////////end:user KYC document///////////////////////
 
