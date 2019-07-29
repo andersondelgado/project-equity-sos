@@ -52,6 +52,11 @@
                     >
                       <i class="icon ion-md-trash"></i>
                     </button>
+
+                    <router-link
+                      class="btn btn-outline-info"
+                      :to="{ name: 'kyc-admin', params: { id: k._id }}"
+                    >kyc</router-link>
                   </td>
                 </tr>
               </tbody>

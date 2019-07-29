@@ -9,15 +9,20 @@ import (
 	"log"
 	"net/http"
 	"strings"
+	rando "math/rand"
 
-	"github.com/andersondelgado/equity-sos-go-dev/config"
-	"github.com/andersondelgado/equity-sos-go-dev/model"
+	"../config"
+	"../model"
 	"github.com/dgrijalva/jwt-go"
 	"github.com/gin-gonic/gin"
 	"github.com/timjacobi/go-couchdb"
 	"golang.org/x/crypto/bcrypt"
 	"net/url"
+	"encoding/base64"
+	"os"
 )
+
+const letterBytes = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
 type Response struct {
 	Success bool        `json:"success"`
@@ -512,6 +517,7 @@ func ArrayPermWithRol(c *gin.Context, rol Rol) []string {
 			nil,
 		}
 		c.JSON(200, datas)
+		//return
 	} else {
 		// find := pr[0]
 
@@ -1243,7 +1249,7 @@ func CreateCouchDB() (bool, error) {
 	resultData := CurlBodyJSONMustHeader("PUT", uri, payload, headers)
 
 	jsonToString := (resultData)
-	fmt.Println("create db: ",jsonToString)
+	fmt.Println("create db: ", jsonToString)
 	decode := []byte(jsonToString)
 	var data struct {
 		OK bool `json:"ok"`
@@ -1251,4 +1257,51 @@ func CreateCouchDB() (bool, error) {
 	json.Unmarshal(decode, &data)
 
 	return data.OK, nil
+}
+
+func B64ToImage(img string) string {
+	splitFile := strings.Split(img, ",")
+	pos0 := splitFile[0]
+	pos00 := strings.Split(pos0, "/")
+	ext0 := pos00[1]
+	ext1 := strings.Split(ext0, ";")
+	ext := ext1[0]
+	fmt.Println(ext)
+	pos1 := splitFile[1]
+
+	dec, err := base64.StdEncoding.DecodeString(pos1)
+	if err != nil {
+		panic(err)
+	}
+
+	strRandom := (RandStringBytes(15))
+	FilesResult := "Images/" + strRandom + "." + ext
+	f, err := os.Create(FilesResult)
+	if err != nil {
+		panic(err)
+	}
+	defer f.Close()
+
+	if _, err := f.Write(dec); err != nil {
+		panic(err)
+	}
+	if err := f.Sync(); err != nil {
+		panic(err)
+	}
+
+	// go to begginng of file
+	f.Seek(0, 0)
+
+	// output file contents
+	io.Copy(os.Stdout, f)
+
+	return FilesResult
+}
+
+func RandStringBytes(n int) string {
+	b := make([]byte, n)
+	for i := range b {
+		b[i] = letterBytes[rando.Intn(len(letterBytes))]
+	}
+	return string(b)
 }

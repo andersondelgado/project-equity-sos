@@ -7,9 +7,9 @@ import (
 	"log"
 	"strconv"
 
-	"github.com/andersondelgado/equity-sos-go-dev/config"
-	"github.com/andersondelgado/equity-sos-go-dev/model"
-	"github.com/andersondelgado/equity-sos-go-dev/util"
+	"../../config"
+	"../../model"
+	"../../util"
 	"github.com/gin-gonic/gin"
 )
 
@@ -61,7 +61,7 @@ func SelectArticle(c *gin.Context) {
 				"error_exception",
 				nil,
 			}
-			c.JSON(200, datas)
+			//c.JSON(200, datas)
 		} else {
 
 			datas = util.Response{
@@ -69,13 +69,14 @@ func SelectArticle(c *gin.Context) {
 				"ok",
 				ts,
 			}
-			c.JSON(200, datas)
+			//c.JSON(200, datas)
 		}
 	} else {
 		datas = util.IsRead(c, rol)
-
-		c.JSON(200, datas)
+		//c.JSON(200, datas)
 	}
+	c.JSON(200, datas)
+	//return
 }
 
 func PaginateArticle(c *gin.Context) {
@@ -171,8 +172,8 @@ func PaginateArticle(c *gin.Context) {
 				"error_exception",
 				nil,
 			}
-			c.JSON(200, datas)
-			return
+			//c.JSON(200, datas)
+			//return
 		} else {
 
 			datas = util.Response{
@@ -180,16 +181,14 @@ func PaginateArticle(c *gin.Context) {
 				"ok",
 				ts,
 			}
-			c.JSON(200, datas)
-		}
-
-		// c.JSON(200, ts)
+			//c.JSON(200, datas)
+		}// c.JSON(200, ts)
 
 	} else {
 		datas = util.IsRead(c, rol)
-
-		c.JSON(200, datas)
 	}
+	c.JSON(200, datas)
+	//return
 }
 
 func SearchPaginateArticle(c *gin.Context) {
@@ -288,7 +287,7 @@ func SearchPaginateArticle(c *gin.Context) {
 					"error_exception",
 					nil,
 				}
-				c.JSON(200, datas)
+				//c.JSON(200, datas)
 			} else {
 
 				datas = util.Response{
@@ -296,7 +295,7 @@ func SearchPaginateArticle(c *gin.Context) {
 					"ok",
 					ts,
 				}
-				c.JSON(200, datas)
+				//c.JSON(200, datas)
 			}
 
 		} else {
@@ -305,15 +304,14 @@ func SearchPaginateArticle(c *gin.Context) {
 				"empty_data",
 				nil,
 			}
-			c.JSON(200, datas)
-			return
+			//c.JSON(200, datas)
+			//return
 		}
 
 	} else {
 		datas = util.IsRead(c, rol)
-
-		c.JSON(200, datas)
 	}
+	c.JSON(200, datas)
 }
 
 func EditArticle(c *gin.Context) {
@@ -362,13 +360,12 @@ func EditArticle(c *gin.Context) {
 			t,
 		}
 
-		c.JSON(200, datas)
-
+		//c.JSON(200, datas)
 	} else {
 		datas = util.IsEdit(c, rol)
-
-		c.JSON(200, datas)
+		//c.JSON(200, datas)
 	}
+	c.JSON(200, datas)
 }
 
 func DeleteArticle(c *gin.Context) {
@@ -396,18 +393,19 @@ func DeleteArticle(c *gin.Context) {
 
 		//cloudant.DB(dbName).Delete(id, rev)
 		util.DeleteCouchDBByID(id, rev)
-		var datas util.Response
+		//var datas util.Response
 		datas = util.Response{
 			true,
 			"ok",
 			nil,
 		}
-		c.JSON(200, datas)
+		//c.JSON(200, datas)
 	} else {
 		datas = util.IsDelete(c, rol)
 
-		c.JSON(200, datas)
+		//c.JSON(200, datas)
 	}
+	c.JSON(200, datas)
 }
 
 func AddArticle(c *gin.Context) {
@@ -431,7 +429,7 @@ func AddArticle(c *gin.Context) {
 		}
 
 		var (
-			datas util.Response
+			//datas util.Response
 			t     model.Article
 		)
 
@@ -443,7 +441,7 @@ func AddArticle(c *gin.Context) {
 					"error_exception",
 					nil,
 				}
-				c.JSON(200, datas)
+				//c.JSON(200, datas)
 			} else {
 				var arrKey = []string{"articles"}
 				//cloudant.DB(dbName).Post(map[string]interface{}{"meta": arrKey[0], "tag": arrKey, "articles": t})
@@ -453,7 +451,7 @@ func AddArticle(c *gin.Context) {
 					"ok",
 					t,
 				}
-				c.JSON(200, datas)
+				//c.JSON(200, datas)
 			}
 			// c.JSON(200, t)
 		} else {
@@ -462,13 +460,13 @@ func AddArticle(c *gin.Context) {
 				"error_exception",
 				nil,
 			}
-			c.JSON(200, datas)
+			//c.JSON(200, datas)
 		}
 	} else {
 		datas = util.IsCreate(c, rol)
-
-		c.JSON(200, datas)
 	}
+
+	c.JSON(200, datas)
 }
 
 func PutArticle(c *gin.Context) {
@@ -494,7 +492,7 @@ func PutArticle(c *gin.Context) {
 		}
 
 		var (
-			datas util.Response
+			//datas util.Response
 			t     model.Article
 		)
 
@@ -506,7 +504,7 @@ func PutArticle(c *gin.Context) {
 					"error_exception",
 					nil,
 				}
-				c.JSON(200, datas)
+				//c.JSON(200, datas)
 			} else {
 				var arrKey = []string{"articles"}
 				//cloudant.DB(dbName).Put(id, map[string]interface{}{"meta": arrKey[0], "tag": arrKey, "articles": t}, rev)
@@ -516,7 +514,7 @@ func PutArticle(c *gin.Context) {
 					"ok",
 					t,
 				}
-				c.JSON(200, datas)
+				//c.JSON(200, datas)
 			}
 		} else {
 			datas = util.Response{
@@ -524,13 +522,13 @@ func PutArticle(c *gin.Context) {
 				"error_exception",
 				nil,
 			}
-			c.JSON(200, datas)
+			//c.JSON(200, datas)
 		}
 	} else {
 		datas = util.IsUpdate(c, rol)
-
-		c.JSON(200, datas)
+		//c.JSON(200, datas)
 	}
+	c.JSON(200, datas)
 }
 
 func BulkArticle(c *gin.Context) {
@@ -566,7 +564,7 @@ func BulkArticle(c *gin.Context) {
 				"error_exception",
 				nil,
 			}
-			c.JSON(200, datas)
+			//c.JSON(200, datas)
 		} else {
 			var arrKey = []string{"articles"}
 			//cloudant.DB(dbName).Post(map[string]interface{}{"meta": arrKey[0], "tag": arrKey, "articles": t})
@@ -576,7 +574,7 @@ func BulkArticle(c *gin.Context) {
 				"ok",
 				t,
 			}
-			c.JSON(200, datas)
+			//c.JSON(200, datas)
 		}
 		// c.JSON(200, t)
 	} else {
@@ -585,8 +583,8 @@ func BulkArticle(c *gin.Context) {
 			"error_exception",
 			nil,
 		}
-		c.JSON(200, datas)
 	}
+	c.JSON(200, datas)
 	// } else {
 	// 	datas = util.IsCreate(c, rol)
 

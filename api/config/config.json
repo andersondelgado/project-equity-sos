@@ -2,7 +2,7 @@
     "domain": "http://localhost:1323",
     "remote_host": [
       {
-        "name": "https://equity-sos-go-dev-grouchy-swan.mybluemix.net"
+        "name": "http://localhost:8000"
       }
     ],
     "port": "1323",

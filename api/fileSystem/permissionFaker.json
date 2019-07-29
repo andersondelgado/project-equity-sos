@@ -22,6 +22,25 @@
         ]
       },
       {
+        "url": "/main/country",
+        "iconWeb": "",
+        "mobile": "",
+        "android": "",
+        "ios": "",
+        "ionic": "",
+        "name": "country",
+        "lang_property": "country",
+        "acl": "country",
+        "visible": false,
+        "value": [
+          "read",
+          "create",
+          "edit",
+          "update",
+          "delete"
+        ]
+      },
+      {
         "url": "/main/category",
         "iconWeb": "",
         "mobile": "",
@@ -90,6 +109,23 @@
           "create",
           "edit"
         ]
+      },
+      {
+        "url": "/main/kyc",
+        "iconWeb": "",
+        "mobile": "",
+        "android": "",
+        "ios": "",
+        "ionic": "",
+        "name": "kyc",
+        "lang_property": "kyc",
+        "acl": "kyc",
+        "visible": false,
+        "value": [
+          "read",
+          "create",
+          "edit"
+        ]
       }
     ]
   },
@@ -106,6 +142,25 @@
         "name": "test",
         "lang_property": "test",
         "acl": "test",
+        "visible": false,
+        "value": [
+          "read",
+          "create",
+          "edit",
+          "update",
+          "delete"
+        ]
+      },
+      {
+        "url": "/main/country",
+        "iconWeb": "",
+        "mobile": "",
+        "android": "",
+        "ios": "",
+        "ionic": "",
+        "name": "country",
+        "lang_property": "country",
+        "acl": "country",
         "visible": false,
         "value": [
           "read",
@@ -201,6 +256,23 @@
           "create",
           "edit"
         ]
+      },
+      {
+        "url": "/main/kyc",
+        "iconWeb": "",
+        "mobile": "",
+        "android": "",
+        "ios": "",
+        "ionic": "",
+        "name": "kyc",
+        "lang_property": "kyc",
+        "acl": "kyc",
+        "visible": false,
+        "value": [
+          "read",
+          "create",
+          "edit"
+        ]
       }
     ]
   },
@@ -217,6 +289,25 @@
         "name": "test",
         "lang_property": "test",
         "acl": "test",
+        "visible": false,
+        "value": [
+          "read",
+          "create",
+          "edit",
+          "update",
+          "delete"
+        ]
+      },
+      {
+        "url": "/main/country",
+        "iconWeb": "",
+        "mobile": "",
+        "android": "",
+        "ios": "",
+        "ionic": "",
+        "name": "country",
+        "lang_property": "country",
+        "acl": "country",
         "visible": false,
         "value": [
           "read",
@@ -350,6 +441,23 @@
         "lang_property": "kyc_admin",
         "acl": "kyc_user",
         "visible": true,
+        "value": [
+          "read",
+          "create",
+          "edit"
+        ]
+      },
+      {
+        "url": "/main/kyc",
+        "iconWeb": "",
+        "mobile": "",
+        "android": "",
+        "ios": "",
+        "ionic": "",
+        "name": "kyc",
+        "lang_property": "kyc",
+        "acl": "kyc",
+        "visible": false,
         "value": [
           "read",
           "create",

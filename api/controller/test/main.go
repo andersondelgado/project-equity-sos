@@ -7,9 +7,9 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/andersondelgado/equity-sos-go-dev/config"
-	"github.com/andersondelgado/equity-sos-go-dev/model"
-	"github.com/andersondelgado/equity-sos-go-dev/util"
+	"../../config"
+	"../../model"
+	"../../util"
 	"github.com/gin-gonic/gin"
 )
 
@@ -93,7 +93,7 @@ func SelectTest(c *gin.Context) {
 				"error_exception",
 				nil,
 			}
-			c.JSON(200, datas)
+			//c.JSON(200, datas)
 		} else {
 
 			datas = util.Response{
@@ -101,13 +101,14 @@ func SelectTest(c *gin.Context) {
 				"ok",
 				ts,
 			}
-			c.JSON(200, datas)
+			//c.JSON(200, datas)
 		}
 	} else {
 		datas = util.IsRead(c, rol)
 
-		c.JSON(200, datas)
+		//c.JSON(200, datas)
 	}
+	c.JSON(200, datas)
 }
 
 func PaginateTest(c *gin.Context) {
@@ -193,7 +194,7 @@ func PaginateTest(c *gin.Context) {
 				"empty_data",
 				results.Doc,
 			}
-			c.JSON(200, datas)
+			//c.JSON(200, datas)
 			// return
 		} else {
 
@@ -202,14 +203,15 @@ func PaginateTest(c *gin.Context) {
 				"ok",
 				ts,
 			}
-			c.JSON(200, datas)
+			//c.JSON(200, datas)
 		}
 
 	} else {
 		datas = util.IsRead(c, rol)
 
-		c.JSON(200, datas)
+		//c.JSON(200, datas)
 	}
+	c.JSON(200, datas)
 }
 
 func SearchPaginateTest(c *gin.Context) {
@@ -299,8 +301,8 @@ func SearchPaginateTest(c *gin.Context) {
 					"empty_data",
 					results.Doc,
 				}
-				c.JSON(200, datas)
-				return
+				//c.JSON(200, datas)
+				//return
 			} else {
 
 				datas = util.Response{
@@ -308,8 +310,8 @@ func SearchPaginateTest(c *gin.Context) {
 					"ok",
 					ts,
 				}
-				c.JSON(200, datas)
-				return
+				//c.JSON(200, datas)
+				//return
 			}
 		} else {
 			datas = util.Response{
@@ -317,16 +319,17 @@ func SearchPaginateTest(c *gin.Context) {
 				"empty_data",
 				nil,
 			}
-			c.JSON(200, datas)
-			return
+			//c.JSON(200, datas)
+			//return
 		}
 
 	} else {
 		datas = util.IsRead(c, rol)
 
-		c.JSON(200, datas)
+		//c.JSON(200, datas)
 		// return
 	}
+	c.JSON(200, datas)
 }
 
 func EditTest(c *gin.Context) {
@@ -373,13 +376,14 @@ func EditTest(c *gin.Context) {
 			t,
 		}
 
-		c.JSON(200, datas)
+		//c.JSON(200, datas)
 
 	} else {
 		datas = util.IsEdit(c, rol)
 
-		c.JSON(200, datas)
+		//c.JSON(200, datas)
 	}
+	c.JSON(200, datas)
 }
 
 func DeleteTest(c *gin.Context) {
@@ -401,18 +405,19 @@ func DeleteTest(c *gin.Context) {
 
 		//cloudant.DB(dbName).Delete(id, rev)
 		util.DeleteCouchDBByID(id, rev)
-		var datas util.Response
+		//var datas util.Response
 		datas = util.Response{
 			true,
 			"ok",
 			nil,
 		}
-		c.JSON(200, datas)
+		//c.JSON(200, datas)
 	} else {
 		datas = util.IsDelete(c, rol)
 
-		c.JSON(200, datas)
+		//c.JSON(200, datas)
 	}
+	c.JSON(200, datas)
 }
 
 func AddTest(c *gin.Context) {
@@ -436,8 +441,8 @@ func AddTest(c *gin.Context) {
 		}
 
 		var (
-			datas util.Response
-			t     model.Test
+			//datas util.Response
+			t model.Test
 		)
 
 		if c.BindJSON(&t) == nil {
@@ -448,7 +453,7 @@ func AddTest(c *gin.Context) {
 					"error_exception",
 					nil,
 				}
-				c.JSON(200, datas)
+				//c.JSON(200, datas)
 			} else {
 				var arrKey = []string{"tests"}
 				//cloudant.DB(dbName).Post(map[string]interface{}{"meta": arrKey[0], "tag": arrKey, "tests": t})
@@ -458,7 +463,7 @@ func AddTest(c *gin.Context) {
 					"ok",
 					t,
 				}
-				c.JSON(200, datas)
+				//c.JSON(200, datas)
 			}
 			// c.JSON(200, t)
 		} else {
@@ -467,13 +472,14 @@ func AddTest(c *gin.Context) {
 				"error_exception",
 				nil,
 			}
-			c.JSON(200, datas)
+			//c.JSON(200, datas)
 		}
 	} else {
 		datas = util.IsCreate(c, rol)
 
-		c.JSON(200, datas)
+		//c.JSON(200, datas)
 	}
+	c.JSON(200, datas)
 }
 
 func PutTest(c *gin.Context) {
@@ -499,8 +505,8 @@ func PutTest(c *gin.Context) {
 		}
 
 		var (
-			datas util.Response
-			t     model.Test
+			//datas util.Response
+			t model.Test
 		)
 
 		if c.BindJSON(&t) == nil {
@@ -511,7 +517,7 @@ func PutTest(c *gin.Context) {
 					"error_exception",
 					nil,
 				}
-				c.JSON(200, datas)
+				//c.JSON(200, datas)
 			} else {
 				var arrKey = []string{"tests"}
 
@@ -523,7 +529,7 @@ func PutTest(c *gin.Context) {
 					"ok",
 					t,
 				}
-				c.JSON(200, datas)
+				//c.JSON(200, datas)
 			}
 		} else {
 			datas = util.Response{
@@ -531,13 +537,14 @@ func PutTest(c *gin.Context) {
 				"error_exception",
 				nil,
 			}
-			c.JSON(200, datas)
+			//c.JSON(200, datas)
 		}
 	} else {
 		datas = util.IsUpdate(c, rol)
 
-		c.JSON(200, datas)
+		//c.JSON(200, datas)
 	}
+	c.JSON(200, datas)
 }
 
 func JokeHandler(c *gin.Context) {

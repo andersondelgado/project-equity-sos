@@ -3,11 +3,11 @@ package middlewares
 import (
 	json2 "encoding/json"
 	"fmt"
+	"net/http"
 	"reflect"
 
-	"github.com/andersondelgado/equity-sos-go-dev/util"
+	"../util"
 	"github.com/gin-gonic/gin"
-	"net/http"
 )
 
 type Response struct {
@@ -41,8 +41,7 @@ func AuthJWT() gin.HandlerFunc {
 			datas.Message = t.Message
 			datas.Data = ""
 
-			//c.AbortWithStatusJSON(http.StatusUnauthorized, datas)
-			c.AbortWithStatus(http.StatusUnauthorized)
+			c.AbortWithStatusJSON(http.StatusUnauthorized, datas)
 			return
 		}
 

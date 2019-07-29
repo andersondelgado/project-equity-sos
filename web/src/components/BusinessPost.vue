@@ -244,7 +244,6 @@
                 </span>
               </div>
             </div>
-
           </div>
           <div class="modal-footer">
             <button
@@ -465,7 +464,7 @@ export default class BusinessPost extends Vue {
 
             let menuAddPost: any = [];
             this.data.map((x: any, k: any) => {
-               x.articles_data.map((k1: any) => {
+              x.articles_data.map((k1: any) => {
                 // if (k1.articles_actors !== null) {
                 //   x.confirmArticleByActor = true;
                 // }
@@ -478,7 +477,6 @@ export default class BusinessPost extends Vue {
                 return k1;
               });
 
-
               menuAddPost = this.menuAddPost;
               x.menuDetailPost = menuAddPost.map((z: any) => {
                 if (z.name === "status") {
@@ -489,6 +487,25 @@ export default class BusinessPost extends Vue {
               });
 
               console.log(x.menuDetailPost);
+
+              let y: any = x.post_data.atachments.map((i: any) => {
+                let name = i.name.map((j: any) => {
+                  // console.log(x);
+                  return Global.DOMAIN_FILE + j;
+                });
+                i.name = name;
+                return i;
+              });
+
+              x.post_data.atachments = y;
+
+              console.log(x);
+              // x.post_data.atachments.map((i: any) => {
+              //   return i.name.map((j: any) => {
+              //     // console.log(x);
+              //     return Global.DOMAIN_FILE + j;
+              //   });
+              // });
             });
             this.columns = keys;
           }
@@ -499,10 +516,13 @@ export default class BusinessPost extends Vue {
       });
   }
 
-  validateFieldQuantity(payload: any, event:any) {
-    let val = event.target.value
-    if ( payload.quantity_delivery < 1 || payload.quantity_left < payload.quantity_delivery) { 
-      	event.target.value = val.substring(0,val.length -1)
+  validateFieldQuantity(payload: any, event: any) {
+    let val = event.target.value;
+    if (
+      payload.quantity_delivery < 1 ||
+      payload.quantity_left < payload.quantity_delivery
+    ) {
+      event.target.value = val.substring(0, val.length - 1);
     }
   }
 
@@ -563,7 +583,7 @@ export default class BusinessPost extends Vue {
   subsQuantityAsk(i: any) {
     // let qask = parseInt(i.quantity_ask) - parseInt(i.quantity_left);
     // i.quantity_ask = qask;
-    console.log(i)
+    console.log(i);
     return i;
   }
 

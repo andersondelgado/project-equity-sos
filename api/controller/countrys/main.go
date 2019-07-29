@@ -7,16 +7,16 @@ import (
 	"log"
 	"strconv"
 
-	"github.com/andersondelgado/equity-sos-go-dev/config"
-	"github.com/andersondelgado/equity-sos-go-dev/model"
-	"github.com/andersondelgado/equity-sos-go-dev/util"
+	"../../config"
+	"../../model"
+	"../../util"
 	"github.com/gin-gonic/gin"
 )
 
 func SelectCountrys(c *gin.Context) {
 
 	var rol util.Rol
-	rol.Acl = "test"
+	rol.Acl = "country"
 	var datas util.Response
 
 	if util.IsRead(c, rol).Success == true {
@@ -61,7 +61,7 @@ func SelectCountrys(c *gin.Context) {
 				"error_exception",
 				nil,
 			}
-			c.JSON(200, datas)
+			//c.JSON(200, datas)
 		} else {
 
 			datas = util.Response{
@@ -69,20 +69,21 @@ func SelectCountrys(c *gin.Context) {
 				"ok",
 				ts,
 			}
-			c.JSON(200, datas)
+			//c.JSON(200, datas)
 		}
 	} else {
 		datas = util.IsRead(c, rol)
 
-		c.JSON(200, datas)
+		//c.JSON(200, datas)
 	}
+	c.JSON(200, datas)
 }
 
 func PaginateCountrys(c *gin.Context) {
 	skip := c.Param("skip")
 	limit := c.Param("limit")
 	var rol util.Rol
-	rol.Acl = "test"
+	rol.Acl = "country"
 	var datas util.Response
 
 	if util.IsRead(c, rol).Success == true {
@@ -158,7 +159,7 @@ func PaginateCountrys(c *gin.Context) {
 				"error_exception",
 				nil,
 			}
-			c.JSON(200, datas)
+			//c.JSON(200, datas)
 		} else {
 
 			datas = util.Response{
@@ -166,20 +167,21 @@ func PaginateCountrys(c *gin.Context) {
 				"ok",
 				ts,
 			}
-			c.JSON(200, datas)
+			//c.JSON(200, datas)
 		}
 	} else {
 		datas = util.IsRead(c, rol)
 
-		c.JSON(200, datas)
+		//c.JSON(200, datas)
 	}
+	c.JSON(200, datas)
 }
 
 func EditCountrys(c *gin.Context) {
 	id := c.Param("id")
 
 	var rol util.Rol
-	rol.Acl = "test"
+	rol.Acl = "country"
 	var datas util.Response
 
 	if util.IsEdit(c, rol).Success == true {
@@ -219,12 +221,13 @@ func EditCountrys(c *gin.Context) {
 			t,
 		}
 
-		c.JSON(200, datas)
+		//c.JSON(200, datas)
 	} else {
 		datas = util.IsEdit(c, rol)
 
-		c.JSON(200, datas)
+		//c.JSON(200, datas)
 	}
+	c.JSON(200, datas)
 }
 
 func DeleteCountrys(c *gin.Context) {
@@ -232,7 +235,7 @@ func DeleteCountrys(c *gin.Context) {
 	rev := c.Param("rev")
 
 	var rol util.Rol
-	rol.Acl = "test"
+	rol.Acl = "country"
 	var datas util.Response
 
 	if util.IsDelete(c, rol).Success == true {
@@ -252,23 +255,24 @@ func DeleteCountrys(c *gin.Context) {
 
 		//cloudant.DB(dbName).Delete(id, rev)
 		util.DeleteCouchDBByID(id,rev)
-		var datas util.Response
+		//var datas util.Response
 		datas = util.Response{
 			true,
 			"ok",
 			nil,
 		}
-		c.JSON(200, datas)
+		//c.JSON(200, datas)
 	} else {
 		datas = util.IsDelete(c, rol)
 
-		c.JSON(200, datas)
+		//c.JSON(200, datas)
 	}
+	c.JSON(200, datas)
 }
 
 func AddCountrys(c *gin.Context) {
 	var rol util.Rol
-	rol.Acl = "test"
+	rol.Acl = "country"
 	var datas util.Response
 
 	if util.IsCreate(c, rol).Success == true {
@@ -287,7 +291,7 @@ func AddCountrys(c *gin.Context) {
 		}
 
 		var (
-			datas util.Response
+			//datas util.Response
 			t     model.Countrys
 		)
 
@@ -299,7 +303,7 @@ func AddCountrys(c *gin.Context) {
 					"error_exception",
 					nil,
 				}
-				c.JSON(200, datas)
+				//c.JSON(200, datas)
 			} else {
 				var arrKey = []string{"countrys"}
 				//cloudant.DB(dbName).Post(map[string]interface{}{"meta": arrKey[0], "tag": arrKey, "countrys": t})
@@ -309,7 +313,7 @@ func AddCountrys(c *gin.Context) {
 					"ok",
 					t,
 				}
-				c.JSON(200, datas)
+				//c.JSON(200, datas)
 			}
 			// c.JSON(200, t)
 		} else {
@@ -318,13 +322,14 @@ func AddCountrys(c *gin.Context) {
 				"error_exception",
 				nil,
 			}
-			c.JSON(200, datas)
+			//c.JSON(200, datas)
 		}
 	} else {
 		datas = util.IsCreate(c, rol)
 
-		c.JSON(200, datas)
+		//c.JSON(200, datas)
 	}
+	c.JSON(200, datas)
 }
 
 func BulkCountrys(c *gin.Context) {
@@ -360,7 +365,7 @@ func BulkCountrys(c *gin.Context) {
 				"error_exception",
 				nil,
 			}
-			c.JSON(200, datas)
+			//c.JSON(200, datas)
 		} else {
 			var arrKey = []string{"countrys"}
 			//cloudant.DB(dbName).Post(map[string]interface{}{"meta": arrKey[0], "tag": arrKey, "countrys": t})
@@ -370,7 +375,7 @@ func BulkCountrys(c *gin.Context) {
 				"ok",
 				t,
 			}
-			c.JSON(200, datas)
+			//c.JSON(200, datas)
 		}
 		// c.JSON(200, t)
 	} else {
@@ -379,8 +384,9 @@ func BulkCountrys(c *gin.Context) {
 			"error_exception",
 			nil,
 		}
-		c.JSON(200, datas)
+		//c.JSON(200, datas)
 	}
+	c.JSON(200, datas)
 	// } else {
 	// 	datas = util.IsCreate(c, rol)
 
@@ -392,7 +398,7 @@ func PutCountrys(c *gin.Context) {
 	id := c.Param("id")
 	rev := c.Param("rev")
 	var rol util.Rol
-	rol.Acl = "test"
+	rol.Acl = "country"
 	var datas util.Response
 
 	if util.IsUpdate(c, rol).Success == true {
@@ -411,7 +417,7 @@ func PutCountrys(c *gin.Context) {
 		}
 
 		var (
-			datas util.Response
+			//datas util.Response
 			t     model.Countrys
 		)
 
@@ -423,7 +429,7 @@ func PutCountrys(c *gin.Context) {
 					"error_exception",
 					nil,
 				}
-				c.JSON(200, datas)
+				//c.JSON(200, datas)
 			} else {
 				var arrKey = []string{"countrys"}
 				//cloudant.DB(dbName).Put(id, map[string]interface{}{"meta": arrKey[0], "tag": arrKey, "countrys": t}, rev)
@@ -433,7 +439,7 @@ func PutCountrys(c *gin.Context) {
 					"ok",
 					t,
 				}
-				c.JSON(200, datas)
+				//c.JSON(200, datas)
 			}
 		} else {
 			datas = util.Response{
@@ -441,13 +447,14 @@ func PutCountrys(c *gin.Context) {
 				"error_exception",
 				nil,
 			}
-			c.JSON(200, datas)
+			//c.JSON(200, datas)
 		}
 	} else {
 		datas = util.IsUpdate(c, rol)
 
-		c.JSON(200, datas)
+		//c.JSON(200, datas)
 	}
+	c.JSON(200, datas)
 }
 
 func CountryFaker(c *gin.Context) {

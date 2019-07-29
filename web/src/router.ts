@@ -100,10 +100,10 @@ const routes = [
         meta: { requiresPer: true }
       },
       {
-        path: 'kyc-admin',
+        path: 'kyc-admin/:id',
         name: 'kyc-admin',
         component: KycUser,
-        meta: { requiresPer: true }
+        // meta: { requiresPer: true }
       }
     ],
     meta: { requiresAuth: true },

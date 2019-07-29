@@ -3,13 +3,13 @@ import { Subject } from 'rxjs';
 const subject = new Subject();
 
 export const messageService = {
-    setSearchs: (message: any) => subject.next({ text: message }),
-    clearSearchs: () => subject.next(),
-    getSearchs: () => subject.asObservable()
+  setSearchs: (message: any) => subject.next({ text: message }),
+  clearSearchs: () => subject.next(),
+  getSearchs: () => subject.asObservable()
 };
 
 export const TableService = {
-  setTable: (tableData:any)=> subject.next({ array: tableData }),
+  setTable: (tableData: any) => subject.next({ array: tableData }),
   clearTable: () => subject.next(),
   getTable: () => subject.asObservable()
 };
@@ -17,12 +17,16 @@ export const TableService = {
 
 export default class Global {
 
-  public static DOMAIN = 'http://localhost:8000/api/';
+  private static URLDOMAIN = 'http://localhost:8000/';
+  // private static URLDOMAIN='https://equity-sos-go-dev-grouchy-swan.mybluemix.net';
+
+  public static DOMAIN = Global.URLDOMAIN + 'api/';
+  public static DOMAIN_FILE = Global.URLDOMAIN;
   // public static DOMAIN = 'https://equity-sos-go-dev-grouchy-swan.mybluemix.net/api/';
 
   public static const = {
     LOGIN: Global.DOMAIN + 'login',
-    REGISTER: Global.DOMAIN + 'register',     
+    REGISTER: Global.DOMAIN + 'register',
     COUNTRY: Global.DOMAIN + 'country/all',
     CHANGE_PASSWORD: Global.DOMAIN + 'reset-password',
     FORGOT_PASSWORD: Global.DOMAIN + 'forgot-password',
@@ -71,6 +75,7 @@ export default class Global {
     GET_KYC_LIST: Global.DOMAIN + 'kyc/all',
     GET_KYC_USER: Global.DOMAIN + 'kyc/userKyc',
     GET_KYC_USER_LIST: Global.DOMAIN + 'kyc-user/{userId}',
+    GET_KYC_USER_LIST_ID: Global.DOMAIN + 'kyc/userKycByID/',
     POST_KYC_USER_DOCUMENTS: Global.DOMAIN + 'kyc-user/add',
     PUT_KYC_USER_DOCUMENTS: Global.DOMAIN + 'kyc-user/edit',
     PUT_KYC_USER_DOCUMENTS_VALIDATE: Global.DOMAIN + 'kyc/adminValidate'
@@ -79,7 +84,7 @@ export default class Global {
   public static headers: any = {
     "Content-Type": "application/json"
   };
-  
+
   public static cors: any = {
     headers: Global.headers
   }
@@ -137,7 +142,7 @@ export default class Global {
     return arr;
   }
 
-  public objectFindByKey(array:any, key:any, value:any) {
+  public objectFindByKey(array: any, key: any, value: any) {
     for (let i = 0; i < array.length; i++) {
       if (array[i][key] === value) {
         return array[i];

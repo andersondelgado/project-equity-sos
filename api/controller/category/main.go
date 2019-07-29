@@ -6,9 +6,9 @@ import (
 	"log"
 	"strconv"
 
-	"github.com/andersondelgado/equity-sos-go-dev/config"
-	"github.com/andersondelgado/equity-sos-go-dev/model"
-	"github.com/andersondelgado/equity-sos-go-dev/util"
+	"../../config"
+	"../../model"
+	"../../util"
 	"github.com/gin-gonic/gin"
 )
 
@@ -56,7 +56,7 @@ func SelectCategory(c *gin.Context) {
 				"error_exception",
 				nil,
 			}
-			c.JSON(200, datas)
+			//c.JSON(200, datas)
 		} else {
 
 			datas = util.Response{
@@ -64,13 +64,14 @@ func SelectCategory(c *gin.Context) {
 				"ok",
 				ts,
 			}
-			c.JSON(200, datas)
+			//c.JSON(200, datas)
 		}
 	} else {
 		datas = util.IsRead(c, rol)
 
-		c.JSON(200, datas)
+		//c.JSON(200, datas)
 	}
+	c.JSON(200, datas)
 }
 
 func PaginateCategory(c *gin.Context) {
@@ -152,7 +153,7 @@ func PaginateCategory(c *gin.Context) {
 				"error_exception",
 				nil,
 			}
-			c.JSON(200, datas)
+			//c.JSON(200, datas)
 		} else {
 
 			datas = util.Response{
@@ -160,13 +161,14 @@ func PaginateCategory(c *gin.Context) {
 				"ok",
 				ts,
 			}
-			c.JSON(200, datas)
+			//c.JSON(200, datas)
 		}
 	} else {
 		datas = util.IsRead(c, rol)
 
-		c.JSON(200, datas)
+		//c.JSON(200, datas)
 	}
+	c.JSON(200, datas)
 }
 
 func SearchPaginateCategory(c *gin.Context) {
@@ -262,7 +264,7 @@ func SearchPaginateCategory(c *gin.Context) {
 					"error_exception",
 					nil,
 				}
-				c.JSON(200, datas)
+				//c.JSON(200, datas)
 			} else {
 
 				datas = util.Response{
@@ -270,7 +272,7 @@ func SearchPaginateCategory(c *gin.Context) {
 					"ok",
 					ts,
 				}
-				c.JSON(200, datas)
+				//c.JSON(200, datas)
 			}
 
 		} else {
@@ -279,15 +281,16 @@ func SearchPaginateCategory(c *gin.Context) {
 				"empty_data",
 				nil,
 			}
-			c.JSON(200, datas)
-			return
+			//c.JSON(200, datas)
+			//return
 		}
 
 	} else {
 		datas = util.IsRead(c, rol)
 
-		c.JSON(200, datas)
+		//c.JSON(200, datas)
 	}
+	c.JSON(200, datas)
 }
 
 func EditCategory(c *gin.Context) {
@@ -333,12 +336,11 @@ func EditCategory(c *gin.Context) {
 			t,
 		}
 
-		c.JSON(200, datas)
+		//c.JSON(200, datas)
 	} else {
 		datas = util.IsEdit(c, rol)
-
-		c.JSON(200, datas)
 	}
+	c.JSON(200, datas)
 }
 
 func DeleteCategory(c *gin.Context) {
@@ -366,18 +368,19 @@ func DeleteCategory(c *gin.Context) {
 
 		//cloudant.DB(dbName).Delete(id, rev)
 		util.DeleteCouchDBByID(id, rev)
-		var datas util.Response
+		//var datas util.Response
 		datas = util.Response{
 			true,
 			"ok",
 			nil,
 		}
-		c.JSON(200, datas)
+		//c.JSON(200, datas)
 	} else {
 		datas = util.IsDelete(c, rol)
 
-		c.JSON(200, datas)
+		//c.JSON(200, datas)
 	}
+	c.JSON(200, datas)
 }
 
 func AddCategory(c *gin.Context) {
@@ -401,7 +404,7 @@ func AddCategory(c *gin.Context) {
 		}
 
 		var (
-			datas util.Response
+			//datas util.Response
 			t     model.Category
 		)
 
@@ -413,7 +416,7 @@ func AddCategory(c *gin.Context) {
 					"error_exception",
 					nil,
 				}
-				c.JSON(200, datas)
+				//c.JSON(200, datas)
 			} else {
 				var arrKey = []string{"categories"}
 				//cloudant.DB(dbName).Post(map[string]interface{}{"meta": arrKey[0], "tag": arrKey, "categories": t})
@@ -423,7 +426,7 @@ func AddCategory(c *gin.Context) {
 					"ok",
 					t,
 				}
-				c.JSON(200, datas)
+				//c.JSON(200, datas)
 			}
 			// c.JSON(200, t)
 		} else {
@@ -432,13 +435,13 @@ func AddCategory(c *gin.Context) {
 				"error_exception",
 				nil,
 			}
-			c.JSON(200, datas)
+			//c.JSON(200, datas)
 		}
 	} else {
 		datas = util.IsCreate(c, rol)
-
-		c.JSON(200, datas)
+		//c.JSON(200, datas)
 	}
+	c.JSON(200, datas)
 }
 
 func PutCategory(c *gin.Context) {
@@ -464,7 +467,7 @@ func PutCategory(c *gin.Context) {
 		}
 
 		var (
-			datas util.Response
+			//datas util.Response
 			t     model.Test
 		)
 
@@ -476,7 +479,7 @@ func PutCategory(c *gin.Context) {
 					"error_exception",
 					nil,
 				}
-				c.JSON(200, datas)
+				//c.JSON(200, datas)
 			} else {
 				var arrKey = []string{"categories"}
 				//cloudant.DB(dbName).Put(id, map[string]interface{}{"meta": arrKey[0], "tag": arrKey, "categories": t}, rev)
@@ -486,7 +489,7 @@ func PutCategory(c *gin.Context) {
 					"ok",
 					t,
 				}
-				c.JSON(200, datas)
+				//c.JSON(200, datas)
 			}
 		} else {
 			datas = util.Response{
@@ -494,11 +497,11 @@ func PutCategory(c *gin.Context) {
 				"error_exception",
 				nil,
 			}
-			c.JSON(200, datas)
+			//c.JSON(200, datas)
 		}
 	} else {
 		datas = util.IsUpdate(c, rol)
-
-		c.JSON(200, datas)
+		//c.JSON(200, datas)
 	}
+	c.JSON(200, datas)
 }

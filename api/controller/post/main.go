@@ -8,10 +8,10 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/andersondelgado/equity-sos-go-dev/config"
-	"github.com/andersondelgado/equity-sos-go-dev/model"
+	"../../config"
+	"../../model"
 
-	"github.com/andersondelgado/equity-sos-go-dev/util"
+	"../../util"
 	"github.com/gin-gonic/gin"
 )
 
@@ -64,7 +64,7 @@ func SelectPost(c *gin.Context) {
 				"error_exception",
 				nil,
 			}
-			c.JSON(200, datas)
+			//c.JSON(200, datas)
 		} else {
 
 			datas = util.Response{
@@ -72,13 +72,14 @@ func SelectPost(c *gin.Context) {
 				"ok",
 				ts,
 			}
-			c.JSON(200, datas)
+			//c.JSON(200, datas)
 		}
 	} else {
 		datas = util.IsRead(c, rol)
 
-		c.JSON(200, datas)
+		//c.JSON(200, datas)
 	}
+	c.JSON(200, datas)
 }
 
 func PaginatePost(c *gin.Context) {
@@ -161,7 +162,7 @@ func PaginatePost(c *gin.Context) {
 				"error_exception",
 				nil,
 			}
-			c.JSON(200, datas)
+			//c.JSON(200, datas)
 		} else {
 
 			datas = util.Response{
@@ -169,13 +170,14 @@ func PaginatePost(c *gin.Context) {
 				"ok",
 				ts,
 			}
-			c.JSON(200, datas)
+			//c.JSON(200, datas)
 		}
 	} else {
 		datas = util.IsRead(c, rol)
 
-		c.JSON(200, datas)
+		//c.JSON(200, datas)
 	}
+	c.JSON(200, datas)
 }
 
 func SearchPaginatePost(c *gin.Context) {
@@ -273,7 +275,7 @@ func SearchPaginatePost(c *gin.Context) {
 					"error_exception",
 					nil,
 				}
-				c.JSON(200, datas)
+				//c.JSON(200, datas)
 			} else {
 
 				datas = util.Response{
@@ -281,7 +283,7 @@ func SearchPaginatePost(c *gin.Context) {
 					"ok",
 					ts,
 				}
-				c.JSON(200, datas)
+				//c.JSON(200, datas)
 			}
 
 		} else {
@@ -290,15 +292,16 @@ func SearchPaginatePost(c *gin.Context) {
 				"empty_data",
 				nil,
 			}
-			c.JSON(200, datas)
-			return
+			//c.JSON(200, datas)
+			//return
 		}
 
 	} else {
 		datas = util.IsRead(c, rol)
 
-		c.JSON(200, datas)
+		//c.JSON(200, datas)
 	}
+	c.JSON(200, datas)
 }
 
 func PaginatePostRolBusiness(c *gin.Context) {
@@ -381,7 +384,7 @@ func PaginatePostRolBusiness(c *gin.Context) {
 				"error_exception",
 				nil,
 			}
-			c.JSON(200, datas)
+			//c.JSON(200, datas)
 		} else {
 
 			datas = util.Response{
@@ -389,13 +392,14 @@ func PaginatePostRolBusiness(c *gin.Context) {
 				"ok",
 				ts,
 			}
-			c.JSON(200, datas)
+			//c.JSON(200, datas)
 		}
 	} else {
 		datas = util.IsRead(c, rol)
 
-		c.JSON(200, datas)
+		//c.JSON(200, datas)
 	}
+	c.JSON(200, datas)
 }
 
 func SearchPaginatePostBusiness(c *gin.Context) {
@@ -493,7 +497,7 @@ func SearchPaginatePostBusiness(c *gin.Context) {
 					"error_exception",
 					nil,
 				}
-				c.JSON(200, datas)
+				//c.JSON(200, datas)
 			} else {
 
 				datas = util.Response{
@@ -501,7 +505,7 @@ func SearchPaginatePostBusiness(c *gin.Context) {
 					"ok",
 					ts,
 				}
-				c.JSON(200, datas)
+				//c.JSON(200, datas)
 			}
 
 		} else {
@@ -510,15 +514,16 @@ func SearchPaginatePostBusiness(c *gin.Context) {
 				"empty_data",
 				nil,
 			}
-			c.JSON(200, datas)
-			return
+			//c.JSON(200, datas)
+			//return
 		}
 
 	} else {
 		datas = util.IsRead(c, rol)
 
-		c.JSON(200, datas)
+		//c.JSON(200, datas)
 	}
+	c.JSON(200, datas)
 }
 
 func AddPost(c *gin.Context) {
@@ -543,7 +548,7 @@ func AddPost(c *gin.Context) {
 		}
 
 		var (
-			datas   util.Response
+			//datas   util.Response
 			payload model.Posts
 			pd      model.PostsData
 			// t1      interface{}
@@ -562,9 +567,17 @@ func AddPost(c *gin.Context) {
 					"error_exception_null",
 					nil,
 				}
-				c.JSON(200, datas)
+				//c.JSON(200, datas)
 			} else {
 				user := util.Auth(c)
+
+				for i := range t.PostsData.Atachments {
+					for j := range t.PostsData.Atachments[i].Name {
+						if t.PostsData.Atachments[i].Name[j] != "" {
+							t.PostsData.Atachments[i].Name[j] = util.B64ToImage(t.PostsData.Atachments[i].Name[j])
+						}
+					}
+				}
 
 				pd = model.PostsData{
 					UserID:         user.ID,
@@ -601,7 +614,7 @@ func AddPost(c *gin.Context) {
 					"ok",
 					t,
 				}
-				c.JSON(200, datas)
+				//c.JSON(200, datas)
 			}
 			// c.JSON(200, t)
 		} else {
@@ -610,13 +623,14 @@ func AddPost(c *gin.Context) {
 				"error_exception_data",
 				nil,
 			}
-			c.JSON(200, datas)
+			//c.JSON(200, datas)
 		}
 	} else {
 		datas = util.IsCreate(c, rol)
 
-		c.JSON(200, datas)
+		//c.JSON(200, datas)
 	}
+	c.JSON(200, datas)
 }
 
 func EditPost(c *gin.Context) {
@@ -705,12 +719,13 @@ func EditPost(c *gin.Context) {
 			t,
 		}
 
-		c.JSON(200, datas)
+		//c.JSON(200, datas)
 	} else {
 		datas = util.IsEdit(c, rol)
 
-		c.JSON(200, datas)
+		//c.JSON(200, datas)
 	}
+	c.JSON(200, datas)
 }
 
 func PutPostBusiness(c *gin.Context) {
@@ -723,12 +738,6 @@ func PutPostBusiness(c *gin.Context) {
 	if util.IsUpdate(c, rol).Success == true {
 
 		cloudantUrl := config.StrNoSQLDrive()
-		//cloudant := util.CloudantDefault()
-		//
-		////ensure db exists
-		////if the db exists the db will be returned anyway
-		//dbName := config.StrNoSQLDBname()
-		// cloudant.CreateDB(dbName)
 
 		if cloudantUrl == "" {
 			c.JSON(200, gin.H{})
@@ -736,7 +745,7 @@ func PutPostBusiness(c *gin.Context) {
 		}
 
 		var (
-			datas util.Response
+			//datas util.Response
 			// t     []model.ArticlesData
 			// t2 []model.ArticlesData
 			t1 interface{}
@@ -751,165 +760,128 @@ func PutPostBusiness(c *gin.Context) {
 			var rst model.Posts
 			json.Unmarshal(decodex, &rst)
 
-			fmt.Println("### ..t: ", rst.ArticlesData)
+			rstArt := rst.ArticlesData
+			if len(rstArt) > 0 {
+				var arrKey = []string{"posts", "_id", "_rev"}
 
-			var arrKey = []string{"posts", "_id", "_rev"}
+				query := model.QuerySelectorAll{
+					Selector: map[string]interface{}{
+						"meta": arrKey[0],
+						"_id":  id,
+					},
+					Fields: arrKey,
+				}
 
-			query := model.QuerySelectorAll{
-				Selector: map[string]interface{}{
-					"meta": arrKey[0],
-					"_id":  id,
-				},
-				Fields: arrKey,
-			}
+				respText := util.FindDataAll(query)
 
-			respText := util.FindDataAll(query)
+				jsonToString := (respText)
+				decode := []byte(jsonToString)
+				var result model.PostsDocumentsArray
+				json.Unmarshal(decode, &result)
+				results := result.Doc[0]
+				date := time.Now()
+				user := util.Auth(c)
 
-			jsonToString := (respText)
-			decode := []byte(jsonToString)
-			var result model.PostsDocumentsArray
-			json.Unmarshal(decode, &result)
-			results := result.Doc[0]
-			// var arAct []model.ArticlesActors
-			date := time.Now()
-			user := util.Auth(c)
+				for i := range results.Posts.ArticlesData {
 
-			for i := range results.Posts.ArticlesData {
+					var (
+						SequencesID string
+					)
+					SequencesID = (RandStringBytes(10))
+					var arAct []model.ArticlesActors
 
-				var (
-					SequencesID string
-				)
-
-				SequencesID = (RandStringBytes(10))
-				var arAct []model.ArticlesActors
-
-				fmt.Println("\nafter results.Posts.ArticlesData[i].ArticlesActors: ", results.Posts.ArticlesData[i].ArticlesActors)
-				fmt.Println("\n")
-				if len(results.Posts.ArticlesData[i].ArticlesActors) > 0 && results.Posts.ArticlesData[i].ArticlesActors != nil {
-					for j := range rst.ArticlesData {
-						for k := range rst.ArticlesData[j].ArticlesActors {
-							if results.Posts.ArticlesData[i].ArticleID == rst.ArticlesData[j].ArticleID {
-								if results.Posts.ArticlesData[i].QuantityLeft != 0 {
-									arAct = append(results.Posts.ArticlesData[i].ArticlesActors, model.ArticlesActors{
+					postArt := results.Posts.ArticlesData[i]
+					if len(postArt.ArticlesActors) > 0 && postArt.ArticlesActors != nil {
+						// PUT
+						for j := range rstArt {
+							if postArt.ArticleID == rstArt[j].ArticleID {
+								rstArtQuantityDelivery := rstArt[j].ArticlesActors[0].QuantityDelivery
+								if postArt.QuantityLeft > 0 && postArt.QuantityLeft >= rstArtQuantityDelivery {
+									arAct = append(postArt.ArticlesActors, model.ArticlesActors{
 										SequencesID:            SequencesID,
 										UserID:                 user.ID,
-										QuantityDelivery:       rst.ArticlesData[j].ArticlesActors[k].QuantityDelivery,
-										QuantityLeft:           results.Posts.ArticlesData[i].QuantityLeft,
+										QuantityDelivery:       rstArtQuantityDelivery,
+										QuantityLeft:           postArt.QuantityLeft,
 										StatusDeliverySender:   true,
 										StatusDeliveryReciever: false,
 										StatusOrder:            "pending_delivery_receiver",
 										CreatedAt:              date,
 										DateDeliverySender:     date,
 									})
-								} else {
-									for L := range results.Posts.ArticlesData[i].ArticlesActors {
-										arAct = append(results.Posts.ArticlesData[i].ArticlesActors, model.ArticlesActors{
-											SequencesID:            results.Posts.ArticlesData[i].ArticlesActors[L].SequencesID,
-											UserID:                 results.Posts.ArticlesData[i].ArticlesActors[L].UserID,
-											QuantityDelivery:       results.Posts.ArticlesData[i].ArticlesActors[L].QuantityDelivery,
-											QuantityLeft:           results.Posts.ArticlesData[i].ArticlesActors[L].QuantityLeft,
-											StatusDeliverySender:   results.Posts.ArticlesData[i].ArticlesActors[L].StatusDeliverySender,
-											StatusDeliveryReciever: results.Posts.ArticlesData[i].ArticlesActors[L].StatusDeliveryReciever,
-											StatusOrder:            results.Posts.ArticlesData[i].ArticlesActors[L].StatusOrder,
-											CreatedAt:              date,
-											DateDeliverySender:     date,
-										})
-									}
 								}
+								results.Posts.ArticlesData[i].ArticlesActors = arAct
+								break
+							}
+						}
+					} else {
+						for j := range rstArt {
+							if postArt.ArticleID == rstArt[j].ArticleID {
+								rstArtQuantityDelivery := rstArt[j].ArticlesActors[0].QuantityDelivery
+								if postArt.QuantityLeft > 0 && postArt.QuantityLeft >= rstArtQuantityDelivery {
+									arAct = append(postArt.ArticlesActors, model.ArticlesActors{
+										SequencesID:            SequencesID,
+										UserID:                 user.ID,
+										QuantityDelivery:       rstArtQuantityDelivery,
+										QuantityLeft:           postArt.QuantityLeft,
+										StatusDeliverySender:   true,
+										StatusDeliveryReciever: false,
+										StatusOrder:            "pending_delivery_receiver",
+										CreatedAt:              date,
+										DateDeliverySender:     date,
+									})
+								}
+								results.Posts.ArticlesData[i].ArticlesActors = arAct
+								break
 							}
 						}
 					}
-
-				} else {
-					for j := range rst.ArticlesData {
-						for k := range rst.ArticlesData[j].ArticlesActors {
-							fmt.Println("\n null ", rst.ArticlesData[j])
-							if results.Posts.ArticlesData[i].ArticleID == rst.ArticlesData[j].ArticleID {
-								fmt.Println("\n null rst.ArticlesData[j].ArticleID ", rst.ArticlesData[j].ArticleID)
-								arAct = append(arAct, model.ArticlesActors{
-									SequencesID:            SequencesID,
-									UserID:                 user.ID,
-									QuantityDelivery:       rst.ArticlesData[j].ArticlesActors[k].QuantityDelivery,
-									QuantityLeft:           results.Posts.ArticlesData[i].QuantityLeft,
-									StatusDeliverySender:   true,
-									StatusDeliveryReciever: false,
-									StatusOrder:            "pending_delivery_receiver",
-									CreatedAt:              date,
-									DateDeliverySender:     date,
-								})
-							}
-						}
+				}
+				status_pos := results.Posts.StatusPost
+				for i := range status_pos {
+					if status_pos[i].StatusID != "partial_completed" {
+						status_pos = append(status_pos, model.StatusPost{
+							StatusID:  "in_progress",
+							CreatedAt: date,
+						})
 					}
-
 				}
 
-				fmt.Println("\nartActors: ", arAct)
-				results.Posts.ArticlesData[i].ArticlesActors = arAct
-
-				fmt.Println("\nbefore results.Posts.ArticlesData[i].ArticlesActors: ", results.Posts.ArticlesData[i].ArticlesActors)
-
-				fmt.Println("\n af results.Posts.ArticlesData: ", results.Posts.ArticlesData)
-
-			}
-
-			fmt.Println("\naf results.Posts.ArticlesData: ", results.Posts.ArticlesData)
-
-			status_pos := results.Posts.StatusPost
-			for i := range status_pos {
-				if status_pos[i].StatusID != "partial_completed" {
-					status_pos = append(status_pos, model.StatusPost{
-						StatusID:  "in_progress",
-						CreatedAt: date,
-					})
+				p = model.Posts{
+					// IDs:          results.ID,
+					// Rev:          results.Rev,
+					// ID:           results.ID,
+					PostsData:    results.Posts.PostsData,
+					ArticlesData: results.Posts.ArticlesData,
+					StatusPost:   status_pos,
+					CreatedAt:    results.Posts.CreatedAt,
+					UpdatedAt:    results.Posts.UpdatedAt,
 				}
+
+				var arrKeyPost = []string{"posts"}
+
+				//cloudant.DB(dbName).Put(id, map[string]interface{}{"meta": arrKeyPost[0], "tag": arrKeyPost, "posts": p}, rev)
+				util.PutCouchDBByID(id, map[string]interface{}{"meta": arrKeyPost[0], "tag": arrKeyPost, "posts": p, "_id": id, "_rev": rev})
+				datas = util.Response{
+					true,
+					"ok",
+					p,
+				}
+				c.JSON(200, datas)
 			}
-
-			// p = model.Posts{
-			// 	// IDs:          results.ID,
-			// 	// Rev:          results.Rev,
-			// 	// ID:           results.ID,
-			// 	PostsData:    results.Posts.PostsData,
-			// 	ArticlesData: t2,
-			// 	StatusPost:   status_pos,
-			// 	CreatedAt:    results.Posts.CreatedAt,
-			// 	UpdatedAt:    results.Posts.UpdatedAt,
-			// }
-
-			p = model.Posts{
-				// IDs:          results.ID,
-				// Rev:          results.Rev,
-				// ID:           results.ID,
-				PostsData:    results.Posts.PostsData,
-				ArticlesData: results.Posts.ArticlesData,
-				StatusPost:   status_pos,
-				CreatedAt:    results.Posts.CreatedAt,
-				UpdatedAt:    results.Posts.UpdatedAt,
-			}
-
-			var arrKeyPost = []string{"posts"}
-
-			//cloudant.DB(dbName).Put(id, map[string]interface{}{"meta": arrKeyPost[0], "tag": arrKeyPost, "posts": p}, rev)
-			util.PutCouchDBByID(id, map[string]interface{}{"meta": arrKeyPost[0], "tag": arrKeyPost, "posts": p, "_id": id, "_rev": rev})
-			datas = util.Response{
-				true,
-				"ok",
-				p,
-			}
-			c.JSON(200, datas)
-
 		} else {
 			datas = util.Response{
 				false,
 				"error_exception",
 				nil,
 			}
-			c.JSON(200, datas)
+			//c.JSON(200, datas)
 		}
 	} else {
 		datas = util.IsUpdate(c, rol)
 
-		c.JSON(200, datas)
+		//c.JSON(200, datas)
 	}
+	c.JSON(200, datas)
 }
 
 func EditPostBusiness(c *gin.Context) {
@@ -955,12 +927,13 @@ func EditPostBusiness(c *gin.Context) {
 			t,
 		}
 
-		c.JSON(200, datas)
+		//c.JSON(200, datas)
 	} else {
 		datas = util.IsEdit(c, rol)
 
-		c.JSON(200, datas)
+		//c.JSON(200, datas)
 	}
+	c.JSON(200, datas)
 }
 
 func PutPost(c *gin.Context) {
@@ -986,8 +959,8 @@ func PutPost(c *gin.Context) {
 		}
 
 		var (
-			datas util.Response
-			t1    interface{}
+			//datas util.Response
+			t1 interface{}
 		)
 
 		if c.BindJSON(&t1) == nil {
@@ -1131,7 +1104,7 @@ func PutPost(c *gin.Context) {
 				"ok",
 				p,
 			}
-			c.JSON(200, datas)
+			//c.JSON(200, datas)
 
 		} else {
 			datas = util.Response{
@@ -1139,13 +1112,14 @@ func PutPost(c *gin.Context) {
 				"error_exception",
 				nil,
 			}
-			c.JSON(200, datas)
+			//c.JSON(200, datas)
 		}
 	} else {
 		datas = util.IsUpdate(c, rol)
 
-		c.JSON(200, datas)
+		//c.JSON(200, datas)
 	}
+	c.JSON(200, datas)
 }
 
 func DeletePost(c *gin.Context) {
@@ -1174,18 +1148,19 @@ func DeletePost(c *gin.Context) {
 
 		//cloudant.DB(dbName).Delete(id, rev)
 		util.DeleteCouchDBByID(id, rev)
-		var datas util.Response
+		//var datas util.Response
 		datas = util.Response{
 			true,
 			"ok",
 			nil,
 		}
-		c.JSON(200, datas)
+		//c.JSON(200, datas)
 	} else {
 		datas = util.IsDelete(c, rol)
 
-		c.JSON(200, datas)
+		//c.JSON(200, datas)
 	}
+	c.JSON(200, datas)
 }
 
 func RandStringBytes(n int) string {

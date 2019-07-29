@@ -1174,6 +1174,8 @@ export default class AddPost extends Vue {
                 return k1;
               });
 
+              // x.post_data.atachments = y;
+
               menuAddPost = this.menuAddPost;
               x.menuDetailPost = menuAddPost.map((z: any) => {
                 if (z.name === "status") {
@@ -1184,6 +1186,25 @@ export default class AddPost extends Vue {
               });
 
               console.log(x.menuDetailPost);
+
+              let y: any = x.post_data.atachments.map((i: any) => {
+                let name = i.name.map((j: any) => {
+                  // console.log(x);
+                  return Global.DOMAIN_FILE + j;
+                });
+                i.name = name;
+                return i;
+              });
+
+              x.post_data.atachments = y;
+
+              console.log(x);
+              // x.post_data.atachments.map((i: any) => {
+              //   return i.name.map((j: any) => {
+              //     // console.log(x);
+              //     return Global.DOMAIN_FILE + j;
+              //   });
+              // });
             });
             this.columns = keys;
           }

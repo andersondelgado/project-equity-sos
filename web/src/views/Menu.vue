@@ -44,7 +44,7 @@
                     <span class="sidebar-mini">L</span>
                     <span class="sidebar-normal">Logout</span>
                   </a>
-                </li> -->
+                </li>-->
               </ul>
             </div>
           </div>
@@ -108,8 +108,14 @@ export default class Menu extends Vue {
         headers: this.headers
       })
       .then(response => {
-        if (response.data.success === true) {
-          this.data = response.data.data;
+        if (response.data.success) {
+          let data: any = response.data.data;
+          data.map((i: any) => {
+            if (i.lang_property !== "kyc_admin") {
+              return i;
+            }
+          });
+          this.data = data;
           localStorage.setItem("permission", JSON.stringify(this.data));
         } else {
           // this.errors.push(response.data.message);
@@ -128,7 +134,8 @@ export default class Menu extends Vue {
           // this.dataUser = response.data.data;
           let data = response.data.data;
           this.dataUser.username = data.username;
-          this.dataUser.avatar = data.avatar;
+          // this.dataUser.avatar = data.avatar;
+          this.dataUser.avatar = Global.DOMAIN_FILE + data.avatar;
           localStorage.setItem("users", JSON.stringify(this.dataUser));
         } else {
           // this.errors.push(response.data.message);
@@ -139,6 +146,7 @@ export default class Menu extends Vue {
   public logout() {
     localStorage.removeItem("token");
     localStorage.removeItem("permission");
+    localStorage.removeItem("users");
     store.commit("logoutUser");
     // location.replace("/login");
     this.$router.replace({ path: "/login" });

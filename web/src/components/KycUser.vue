@@ -441,17 +441,67 @@ export default class KycUser extends Vue {
 
   mounted() {
     this.isKYCAdmin();
+    this.getKyCListByID();
   }
 
   getKycList() {
     this.kycList = undefined;
-    KycService.getKycUser().then(payload => {
+    KycService.getKycUser().then((payload: any) => {
       console.log(payload);
       if (payload.id != undefined) {
         this.form = payload;
       }
+      try {
+        let obj: any = payload;
+        let y: any = obj.attachment.map((i: any) => {
+          let user_attachments = i.user_attachments.map((j: any) => {
+            if (j.attachment_name !== undefined) {
+              j.attachment_name = Global.DOMAIN_FILE + j.attachment_name;
+            }
+            return j;
+          });
+
+          i.user_attachments = user_attachments;
+          return i;
+        });
+        payload.attachment = y;
+      } catch (e) {}
+
+      console.log(payload);
+
       this.kycList = payload.attachment;
     });
+  }
+
+  getKyCListByID() {
+    try {
+      let id = this.$route.params.id;
+      console.log("get id: " + id);
+      this.kycList = undefined;
+      KycService.getKycListUserByID(id).then((payload: any) => {
+        console.log(payload);
+        if (payload.id != undefined) {
+          this.form = payload;
+        }
+        try {
+          let obj: any = payload;
+          let y: any = obj.attachment.map((i: any) => {
+            let user_attachments = i.user_attachments.map((j: any) => {
+              if (j.attachment_name !== undefined) {
+                j.attachment_name = Global.DOMAIN_FILE + j.attachment_name;
+              }
+              return j;
+            });
+
+            i.user_attachments = user_attachments;
+            return i;
+          });
+          payload.attachment = y;
+        } catch (e) {}
+        console.log(payload);
+        this.kycList = payload.attachment;
+      });
+    } catch (e) {}
   }
 
   getCountrys() {
@@ -467,29 +517,28 @@ export default class KycUser extends Vue {
     let serviceKyc: any = null;
 
     this.$validator.validate().then(valid => {
-        if (valid) {           
-            let formData:any = vm.form
-                formData.attachment = this.formAttachments
-            
-            if(this.userType != 'admin'){
-                if(formData.id != ""){
-                    serviceKyc = KycService.putKycUser(formData)
-                }else{
-                    serviceKyc = KycService.postKycUser(formData)
-                }
-            }else{
-                if(formData.id){
-                    serviceKyc = KycService.putKycUserAdminValidate(formData)
-                }
-            }
-            
-            serviceKyc.then((response:any)=>{
-                if (response)
-                    this.getKycList();
-            });
-        }else{
-            return false;
+      if (valid) {
+        let formData: any = vm.form;
+        formData.attachment = this.formAttachments;
+
+        if (this.userType != "admin") {
+          if (formData.id != "") {
+            serviceKyc = KycService.putKycUser(formData);
+          } else {
+            serviceKyc = KycService.postKycUser(formData);
+          }
+        } else {
+          if (formData.id) {
+            serviceKyc = KycService.putKycUserAdminValidate(formData);
+          }
         }
+
+        serviceKyc.then((response: any) => {
+          if (response) this.getKycList();
+        });
+      } else {
+        return false;
+      }
     });
   }
 
@@ -584,17 +633,17 @@ export default class KycUser extends Vue {
 
   public isKYCAdmin() {
     const h = window.location.pathname;
-    let spl=h.split("/main/")
-    console.log("url: " + spl[0]+ " 1: "+spl[1]);
-    let spl1=spl[1].split("kyc-")
-    console.log("##url: " + spl1[0]+ " ##1: "+spl1[1]);
-    switch(spl1[1]){
+    let spl = h.split("/main/");
+    console.log("url: " + spl[0] + " 1: " + spl[1]);
+    let spl1 = spl[1].split("kyc-");
+    console.log("##url: " + spl1[0] + " ##1: " + spl1[1]);
+    switch (spl1[1]) {
       case "user":
         this.userType = "Bussines";
         break;
-        default:
-          this.userType = "admin";
-          break;
+      default:
+        this.userType = "admin";
+        break;
     }
   }
 }
