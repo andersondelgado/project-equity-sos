@@ -85,7 +85,7 @@ func Register(c *gin.Context) {
 			//c.JSON(200, datas)
 		} else {
 			if user.Avatar != "" {
-				user.Avatar = util.B64ToImage(user.Avatar)
+				user.Avatar = config.EnviromentsRaw().RemoteHost[0].Name + "/" + util.B64ToImage(user.Avatar)
 			}
 
 			byteP := []byte(user.Password)
@@ -977,8 +977,8 @@ func AddUsers(c *gin.Context) {
 	if util.IsRead(c, role).Success == true {
 
 		if c.BindJSON(&t) == nil {
-			if t.Avatar!=""{
-				t.Avatar=util.B64ToImage(t.Avatar)
+			if t.Avatar != "" {
+				t.Avatar = config.EnviromentsRaw().RemoteHost[0].Name + util.B64ToImage(t.Avatar)
 			}
 			u = model.User{
 				Avatar:   t.Avatar,
@@ -1365,7 +1365,7 @@ func PutUsers(c *gin.Context) {
 				}
 
 				if t.Avatar != "" {
-					t.Avatar = util.B64ToImage(t.Avatar)
+					t.Avatar = config.EnviromentsRaw().RemoteHost[0].Name + "/" + util.B64ToImage(t.Avatar)
 				}
 
 				byteP := []byte(t.Password)

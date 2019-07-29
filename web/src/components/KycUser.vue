@@ -447,26 +447,13 @@ export default class KycUser extends Vue {
   getKycList() {
     this.kycList = undefined;
     KycService.getKycUser().then((payload: any) => {
+      console.log("after----");
       console.log(payload);
+      console.log("after----");
       if (payload.id != undefined) {
         this.form = payload;
       }
-      try {
-        let obj: any = payload;
-        let y: any = obj.attachment.map((i: any) => {
-          let user_attachments = i.user_attachments.map((j: any) => {
-            if (j.attachment_name !== undefined) {
-              j.attachment_name = Global.DOMAIN_FILE + j.attachment_name;
-            }
-            return j;
-          });
-
-          i.user_attachments = user_attachments;
-          return i;
-        });
-        payload.attachment = y;
-      } catch (e) {}
-
+      console.log("\nbeforer----");
       console.log(payload);
 
       this.kycList = payload.attachment;
@@ -483,21 +470,6 @@ export default class KycUser extends Vue {
         if (payload.id != undefined) {
           this.form = payload;
         }
-        try {
-          let obj: any = payload;
-          let y: any = obj.attachment.map((i: any) => {
-            let user_attachments = i.user_attachments.map((j: any) => {
-              if (j.attachment_name !== undefined) {
-                j.attachment_name = Global.DOMAIN_FILE + j.attachment_name;
-              }
-              return j;
-            });
-
-            i.user_attachments = user_attachments;
-            return i;
-          });
-          payload.attachment = y;
-        } catch (e) {}
         console.log(payload);
         this.kycList = payload.attachment;
       });

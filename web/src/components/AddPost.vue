@@ -11,6 +11,10 @@
         >
           <i class="icon ion-md-document"></i>
         </button>
+
+        <button class="btn btn-primary" type="button" @click="getAll()">
+          <i class="icon ion-md-sync"></i>
+        </button>
         <br />
 
         <img
@@ -88,6 +92,25 @@
                                   height="50"
                                   alt
                                 />
+                              </div>
+                            </div>
+
+                            <div v-if="fi.type=='video'" class="row">
+                              <div
+                                class="col"
+                                v-for="(fi1,index1) in fi.name"
+                                :key="`itemll-${index1}`"
+                              >
+                                <div class="embed-responsive embed-responsive-4by3">
+                                  <video
+                                    class="embed-responsive-item"
+                                    v-if="vid!=null"
+                                    :src="fi1"
+                                    width="250"
+                                    height="250"
+                                    controls
+                                  />
+                                </div>
                               </div>
                             </div>
                           </div>

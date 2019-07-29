@@ -294,7 +294,7 @@ func AddKycUser(c *gin.Context) {
 
 				for i := range t.Attachment {
 					if t.Attachment[i].AttachmentName != "" {
-						t.Attachment[i].AttachmentName = util.B64ToImage(t.Attachment[i].AttachmentName)
+						t.Attachment[i].AttachmentName = config.EnviromentsRaw().RemoteHost[0].Name + "/" + util.B64ToImage(t.Attachment[i].AttachmentName)
 					}
 				}
 
@@ -412,7 +412,7 @@ func EditKycUser(c *gin.Context) {
 
 				for i := range t.Attachment {
 					if t.Attachment[i].AttachmentName != "" {
-						t.Attachment[i].AttachmentName = util.B64ToImage(t.Attachment[i].AttachmentName)
+						t.Attachment[i].AttachmentName = config.EnviromentsRaw().RemoteHost[0].Name + "/" + util.B64ToImage(t.Attachment[i].AttachmentName)
 					}
 				}
 

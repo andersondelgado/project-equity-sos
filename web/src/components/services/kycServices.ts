@@ -9,28 +9,41 @@ export default class KycService {
 
     public static getListKyc() {
         let http = Global.const.GET_KYC_LIST;
-        return axios.get(http).then((response:any) => this.evalReponseDomain(response))
+        return axios.get(http).then((response: any) => this.evalReponseDomain(response))
     }
 
     public static getKycListUser() {
         let http = Global.const.GET_KYC_USER;
-        return axios.get(http).then((response:any) => this.evalReponseDomain(response))
+        return axios.get(http).then((response: any) => this.evalReponseDomain(response))
     }
 
     public static getKycListUserByID(id: any) {
         let http = Global.const.GET_KYC_USER_LIST_ID + id;
-        return axios.get(http).then((response:any) => this.evalReponseDomain(response))
+        return axios.get(http).then((response: any) => this.evalReponseDomain(response))
     }
 
     public static getKycUser() {
         let data: any = []
-        return this.getListKyc().then((payloadKycList:any) => {
-            return KycService.getKycListUser().then((payloadKycUser:any) => {
+        return this.getListKyc().then((payloadKycList: any) => {
+            return KycService.getKycListUser().then((payloadKycUser: any) => {
                 if (payloadKycUser) {
                     let documentsUser = payloadKycList.map((val: any) => {
+                        console.log("user....")
+                        console.log(documentsUser)
                         let ind = payloadKycUser.attachment.findIndex((obj: any) => val.id == obj.document_id)
-                        if (ind >= 0)
+                        if (ind >= 0) {
                             val.user_attachments = payloadKycUser.attachment[ind]
+                            try {
+                                let user_attachments = payloadKycUser.user_attachments.map((j: any) => {
+                                    if (j.attachment_name !== undefined) {
+                                        j.attachment_name = Global.DOMAIN_FILE + j.attachment_name;
+                                    }
+                                    return j;
+                                });
+
+                                val.user_attachments = user_attachments;
+                            } catch (e) { }
+                        }
                         return val
                     })
                     payloadKycUser.attachment = documentsUser
@@ -49,7 +62,7 @@ export default class KycService {
     public static postKycUser(payload: object) {
         let http = Global.const.POST_KYC_USER_DOCUMENTS;
         let headers = Global.cors;
-        return axios.post(http, payload, headers).then((response:any) => {
+        return axios.post(http, payload, headers).then((response: any) => {
             return this.evalReponseDomain(response)
         });
     }
@@ -57,7 +70,7 @@ export default class KycService {
     public static putKycUser(payload: object) {
         let http = Global.const.PUT_KYC_USER_DOCUMENTS;
         let headers = Global.cors;
-        return axios.put(http, payload, headers).then((response:any) => {
+        return axios.put(http, payload, headers).then((response: any) => {
             return this.evalReponseDomain(response)
         });
     }
@@ -65,7 +78,7 @@ export default class KycService {
     public static putKycUserAdminValidate(payload: object) {
         let http = Global.const.PUT_KYC_USER_DOCUMENTS_VALIDATE;
         let headers = Global.cors;
-        return axios.put(http, payload, headers).then((response:any) => {
+        return axios.put(http, payload, headers).then((response: any) => {
             return this.evalReponseDomain(response)
         });
     }

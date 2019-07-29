@@ -10,6 +10,10 @@
           height="30"
           alt
         />
+
+        <button class="btn btn-primary" type="button" @click="getAll()">
+          <i class="icon ion-md-sync"></i>
+        </button>
         <div class="row">
           <div class="col-xl-6" v-for="k in data" :key="k.id">
             <div class="card">
@@ -76,6 +80,24 @@
                                   width="50"
                                   height="50"
                                   alt
+                                />
+                              </div>
+                            </div>
+                          </div>
+                          <div v-if="fi.type=='video'" class="row">
+                            <div
+                              class="col"
+                              v-for="(fi1,index1) in fi.name"
+                              :key="`itemll-${index1}`"
+                            >
+                              <div class="embed-responsive embed-responsive-4by3">
+                                <video
+                                  class="embed-responsive-item"
+                                  v-if="vid!=null"
+                                  :src="fi1"
+                                  width="250"
+                                  height="250"
+                                  controls
                                 />
                               </div>
                             </div>

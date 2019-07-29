@@ -21,7 +21,8 @@ export default class Global {
   // private static URLDOMAIN='https://equity-sos-go-dev-grouchy-swan.mybluemix.net';
 
   public static DOMAIN = Global.URLDOMAIN + 'api/';
-  public static DOMAIN_FILE = Global.URLDOMAIN;
+  // public static DOMAIN_FILE = Global.URLDOMAIN;
+  public static DOMAIN_FILE = "";
   // public static DOMAIN = 'https://equity-sos-go-dev-grouchy-swan.mybluemix.net/api/';
 
   public static const = {

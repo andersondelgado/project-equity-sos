@@ -744,7 +744,7 @@ func ArrayPermMenu(c *gin.Context) []Module {
 	// //ensure db exists
 	// //if the db exists the db will be returned anyway
 	// dbName := config.StrNoSQLDBname()
-	var datas Response
+	// var datas Response
 	var arrayPerms []Module
 	user := c.MustGet("user").(string)
 	// fmt.Println("##user: ", user)
@@ -785,12 +785,13 @@ func ArrayPermMenu(c *gin.Context) []Module {
 	// fmt.Println("##pr: ", (pr[0]))
 
 	if len(pr) == 0 {
-		datas = Response{
-			false,
-			"error_exception",
-			nil,
-		}
-		c.JSON(200, datas)
+		// datas = Response{
+		// 	false,
+		// 	"error_exception",
+		// 	nil,
+		// }
+		// c.JSON(200, datas)
+		return arrayPerms
 	} else {
 		find := pr[0]
 

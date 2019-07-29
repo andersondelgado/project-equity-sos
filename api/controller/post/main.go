@@ -574,7 +574,7 @@ func AddPost(c *gin.Context) {
 				for i := range t.PostsData.Atachments {
 					for j := range t.PostsData.Atachments[i].Name {
 						if t.PostsData.Atachments[i].Name[j] != "" {
-							t.PostsData.Atachments[i].Name[j] = util.B64ToImage(t.PostsData.Atachments[i].Name[j])
+							t.PostsData.Atachments[i].Name[j] = config.EnviromentsRaw().RemoteHost[0].Name + "/" + util.B64ToImage(t.PostsData.Atachments[i].Name[j])
 						}
 					}
 				}
@@ -866,7 +866,7 @@ func PutPostBusiness(c *gin.Context) {
 					"ok",
 					p,
 				}
-				c.JSON(200, datas)
+				// c.JSON(200, datas)
 			}
 		} else {
 			datas = util.Response{
