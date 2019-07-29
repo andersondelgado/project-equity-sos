@@ -17,7 +17,7 @@ import (
 // Documents KYC //
 func SelectKyc(c *gin.Context) {
 	var rol util.Rol
-	rol.Acl = "kyc_user"
+	rol.Acl = "test"
 	var datas util.Response
 	datas = util.Response{
 		false,
@@ -80,7 +80,7 @@ func SelectKyc(c *gin.Context) {
 func SelectKycUser(c *gin.Context) {
 
 	var rol util.Rol
-	rol.Acl = "kyc_user"
+	rol.Acl = "test"
 	var datas util.Response
 
 	if util.IsRead(c, rol).Success == true {
@@ -156,7 +156,7 @@ func SelectKycUser(c *gin.Context) {
 
 func AddKycUser(c *gin.Context) {
 	var rol util.Rol
-	rol.Acl = "kyc_user"
+	rol.Acl = "test"
 	var datas util.Response
 
 	if util.IsCreate(c, rol).Success == true {
@@ -227,7 +227,7 @@ func AddKycUser(c *gin.Context) {
 
 func EditKycUser(c *gin.Context) {
 	var rol util.Rol
-	rol.Acl = "post"
+	rol.Acl = "test"
 	var datas util.Response
 
 	if util.IsEdit(c, rol).Success == true {
@@ -394,4 +394,3 @@ func BulkKyc(c *gin.Context) {
 }
 
 // Documents KYC //
-
